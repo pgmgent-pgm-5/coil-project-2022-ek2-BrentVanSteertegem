@@ -1,0 +1,8 @@
+{
+  "name": "@brick-store/backend",
+  "version": "1.0.0",
+  "description": "The backend for the project I made for the course 'Programming 5'.",
+  "author": "Brent Van Steertegem <brent.vansteertegem@student.arteveldehs.be>",
+  "license": "MIT",
+  "private": true
+}

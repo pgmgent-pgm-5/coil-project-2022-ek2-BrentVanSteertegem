@@ -1,0 +1,16 @@
+{
+  "name": "brick-store",
+  "version": "1.0.0",
+  "description": "The project I made for the course 'Programming 5'.",
+  "author": "Brent Van Steertegem <brent.vansteertegem@student.arteveldehs.be>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:frontend": "yarn workspace @brick-store/frontend dev"
+  },
+  "repository": "https://github.com/pgmgent-pgm-5/coil-project-2022-ek2-BrentVanSteertegem"
+}

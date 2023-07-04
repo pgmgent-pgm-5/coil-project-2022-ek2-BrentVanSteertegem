@@ -70,8 +70,3 @@ button:hover, a:hover {
 div#root {
     margin: 0;
 }
-
-.lego_font, .lego_font * {
-    font-family: 'Legothick';
-    text-transform: uppercase;
-}

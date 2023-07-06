@@ -1,7 +1,11 @@
+import { Container, Header } from './components'
+
 const App = () => {
   return (
     <>
-      <h1>Brick Store</h1>
+      <Header />
+      <Container>
+      </Container>
     </>
   )
 }

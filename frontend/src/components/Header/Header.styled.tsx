@@ -15,7 +15,7 @@ export const StLogo = styled.h2`
     font-family: 'Legothick', 'Poppins', sans-serif;
     color: ${Variables.colors.white};
     text-transform: uppercase;
-    padding: 0 0 0 0.1rem;
+    padding: 0 0.3rem 0 0.1rem;
 `
 
 export const StMenu = styled.ul<MenuProps>`

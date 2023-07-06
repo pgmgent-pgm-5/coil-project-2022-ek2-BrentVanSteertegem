@@ -6,6 +6,10 @@
     height: fit-content;
 }
 
+*:has(*) {
+    margin: 0;
+}
+
 html, body {
     margin: 0;
 }

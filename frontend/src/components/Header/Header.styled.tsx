@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { Variables } from '../../style'
 
 export const StHeader = styled.header`
-    background-color: ${Variables.colors.red};
-    margin: 0;
+    background-color: ${Variables.colors.primary};
 `
 
 export const StSection = styled.section`

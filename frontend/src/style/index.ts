@@ -2,6 +2,7 @@ const Colors = {
     white: '#fff',
     black: '#000',
     red: '#e00',
+    darkRed: '#c00',
     yellow: '#fe0',
 }
   
@@ -31,6 +32,7 @@ export const Variables = {
     colors: { 
         ...Colors,
         primary: Colors.red,
+        primaryDark: Colors.darkRed,
         secondary: Colors.yellow,
         text: Colors.black,
         logoText: Colors.white,

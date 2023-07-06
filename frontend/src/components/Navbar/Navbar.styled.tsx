@@ -12,16 +12,14 @@ export const StCategories = styled.ul`
     align-items: center;
     gap: 0;
     margin: 0 0 0 -1rem;
-`
-export const StCategory = styled.li`
     list-style-type: none;
 
-    &:last-child > a > span {
+    li:last-child > a > span {
         border-right: 0;
     }
 `
 
-export const StCategoryLink = styled.a`
+export const StCategory = styled.a`
     color: ${Variables.colors.white};
     text-decoration: none;
     padding: 1rem;

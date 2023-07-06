@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Variables } from '../../style'
 import { StBarProps } from './MenuButton'
 
-export const StMenu = styled.button`
+export const StMenuButton = styled.button`
     width: 2rem;
     height: 1.75rem;
     padding: 0;
@@ -36,7 +36,7 @@ export const StBar = styled.span<StBarProps>`
     transition: .25s ease-in-out;
 
     &:nth-child(1) {
-        ${({ menuOpen }) => menuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen ? `
             width: 0%;
             left: 50%;
         ` : `
@@ -44,7 +44,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(2) {
-        ${({ menuOpen }) => menuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen ? `
             transform: rotate(45deg);
             top: 0.7rem;
         ` : `
@@ -52,7 +52,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(3) {
-        ${({ menuOpen }) => menuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen ? `
             transform: rotate(-45deg);
             top: 0.7rem;
         ` : `
@@ -60,7 +60,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(4) {
-        ${({ menuOpen }) => menuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen ? `
             width: 0%;
             left: 50%;
         ` : `

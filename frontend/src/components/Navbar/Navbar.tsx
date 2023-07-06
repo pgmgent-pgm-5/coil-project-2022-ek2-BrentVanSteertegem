@@ -1,47 +1,47 @@
 import { Container } from '../Container'
-import { StNavbar, StCategories, StCategory, StCategoryLink, StCategoryName } from './Navbar.styled'
+import { StNavbar, StCategories, StCategory, StCategoryName } from './Navbar.styled'
 
 export const Navbar = () => {
     return (
         <StNavbar>
             <Container>
                 <StCategories>
-                    <StCategory>
-                        <StCategoryLink
+                    <li>
+                        <StCategory
                             href='/Bricks'
                         >
                             <StCategoryName>
                                 Bricks
                             </StCategoryName>
-                        </StCategoryLink>
-                    </StCategory>
-                    <StCategory>
-                        <StCategoryLink
+                        </StCategory>
+                    </li>
+                    <li>
+                        <StCategory
                             href='/Plates'
                         >
                             <StCategoryName>
                                 Plates
                             </StCategoryName>
-                        </StCategoryLink>
-                    </StCategory>
-                    <StCategory>
-                        <StCategoryLink
+                        </StCategory>
+                    </li>
+                    <li>
+                        <StCategory
                             href='/Minifigs'
                         >
                             <StCategoryName>
                                 Minifigs
                             </StCategoryName>
-                        </StCategoryLink>
-                    </StCategory>
-                    <StCategory>
-                        <StCategoryLink
+                        </StCategory>
+                    </li>
+                    <li>
+                        <StCategory
                             href='/Other'
                         >
                             <StCategoryName>
                                 Other
                             </StCategoryName>
-                        </StCategoryLink>
-                    </StCategory>
+                        </StCategory>
+                    </li>
                 </StCategories>
             </Container>
         </StNavbar>

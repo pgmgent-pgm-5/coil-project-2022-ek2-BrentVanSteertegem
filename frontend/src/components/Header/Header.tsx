@@ -1,10 +1,17 @@
+import { ReactNode, useState } from 'react'
 import { Navbar } from '../Navbar'
 import { MenuButton } from '../Button'
 import { Container } from '../Container'
-import { StHeader, StLogo, StSection } from './Header.styled'
+import { StCategory, StHeader, StLogo, StMenu, StSection } from './Header.styled'
+
+export type MenuProps = {
+    children?: ReactNode
+    isMenuOpen: boolean
+}
 
 export const Header = () => {
     const { innerWidth } = window
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
         <>
@@ -13,9 +20,43 @@ export const Header = () => {
                     <StSection>
                         <StLogo>Brick Store</StLogo>
                         {innerWidth < 480 && 
-                            <MenuButton 
-                            onClick={() => console.log('Menu button clicked')}
-                            />
+                            <>
+                                <MenuButton 
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                />
+                                <StMenu
+                                    isMenuOpen={isMenuOpen}
+                                >
+                                    <li>
+                                        <StCategory
+                                            href='/Bricks'
+                                        >
+                                            Bricks
+                                        </StCategory>
+                                    </li>
+                                    <li>
+                                        <StCategory
+                                            href='/Plates'
+                                        >
+                                            Plates
+                                        </StCategory>
+                                    </li>
+                                    <li>
+                                        <StCategory
+                                            href='/Minifigs'
+                                        >
+                                            Minifigs
+                                        </StCategory>
+                                    </li>
+                                    <li>
+                                        <StCategory
+                                            href='/Other'
+                                        >
+                                            Other
+                                        </StCategory>
+                                    </li>
+                                </StMenu>
+                            </>
                         }
                     </StSection>
                 </Container>

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { StBar, StMenu } from './Button.styled'
+import { StBar, StMenuButton } from './Button.styled'
 
 export type StBarProps = {
-    menuOpen: boolean
+    isMenuOpen: boolean
 }
 
 type MenuButtonProps = {
@@ -10,29 +10,29 @@ type MenuButtonProps = {
 }
 
 export const MenuButton = ({ onClick }: MenuButtonProps) => {
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const handleClick = () => {
-        setMenuOpen(!menuOpen)
+        setIsMenuOpen(!isMenuOpen)
         onClick()
     }
 
     return (
-        <StMenu
+        <StMenuButton
             onClick={handleClick}
         >
             <StBar
-                menuOpen={menuOpen}
+                isMenuOpen={isMenuOpen}
             />
             <StBar
-                menuOpen={menuOpen}
+                isMenuOpen={isMenuOpen}
             />
             <StBar
-                menuOpen={menuOpen}
+                isMenuOpen={isMenuOpen}
             />
             <StBar
-                menuOpen={menuOpen}
+                isMenuOpen={isMenuOpen}
             />
-        </StMenu>
+        </StMenuButton>
     )
 }

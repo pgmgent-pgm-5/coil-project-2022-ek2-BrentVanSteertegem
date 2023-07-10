@@ -4,11 +4,16 @@ const Colors = {
     red: '#e00',
     darkRed: '#c00',
     grey: '#777',
+    lightGrey: '#eee',
 }
   
 const Fonts = {
     text: 'Poppins',
     logo: 'Legothick',
+}
+
+const Breakpoints = {
+    mobile: 30,
 }
 
 const Sizes = {
@@ -48,6 +53,7 @@ export const Variables = {
         buttonText: Colors.white,
     },
     fonts: { ...Fonts },
+    breakpoints: { ...Breakpoints },
     sizes: { ...Sizes },
     textSizes: { ...TextSizes },
     spacing: { ...Spacing },

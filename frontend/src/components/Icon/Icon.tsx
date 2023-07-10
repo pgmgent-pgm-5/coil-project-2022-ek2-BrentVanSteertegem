@@ -3,10 +3,11 @@ import { IconName } from '@fortawesome/fontawesome-svg-core'
 
 type IconProps = {
     name: IconName
+    isBrandIcon? : boolean
 }
 
-export const Icon = ({ name }: IconProps) => {
+export const Icon = ({ name, isBrandIcon }: IconProps) => {
     return (
-        <FontAwesomeIcon icon={name} />
+        <FontAwesomeIcon icon={[isBrandIcon && isBrandIcon ? 'fab' : 'fas', name]} />
     )
 }

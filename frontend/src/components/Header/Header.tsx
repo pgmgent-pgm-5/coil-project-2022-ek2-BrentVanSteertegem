@@ -5,6 +5,7 @@ import { Container } from '../Container'
 import { Searchbar } from '../Searchbar'
 import { Icon } from '../Icon'
 import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StMenu, StSection } from './Header.styled'
+import { Variables } from '../../style'
 
 export type MenuProps = {
     children?: ReactNode
@@ -21,7 +22,7 @@ export const Header = () => {
                 <Container>
                     <StSection>
                         <StLogo>Brick Store</StLogo>
-                        {innerWidth < 480 ? 
+                        {innerWidth < Variables.breakpoints.mobile * 16 ? 
                             <StHeaderButtons>
                                  <StHeaderButton
                                     onClick={() => console.log('search')}
@@ -90,7 +91,7 @@ export const Header = () => {
                     </StSection>
                 </Container>
             </StHeader>
-            {innerWidth >= 480 && 
+            {innerWidth >= Variables.breakpoints.mobile * 16 && 
                 <Navbar />
             }
         </>

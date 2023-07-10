@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { StContainer } from './Container.styled'
 
-type ContainerProps = {
+export type ContainerProps = {
     children?: ReactNode
 }
 

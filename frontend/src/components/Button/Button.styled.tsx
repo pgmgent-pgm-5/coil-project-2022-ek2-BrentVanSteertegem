@@ -21,11 +21,10 @@ export const StButtonSecondary = styled(StButton)`
 `
 
 export const StMenuButton = styled.button`
-    width: 2rem;
+    width: 2.5rem;
     height: 1.75rem;
-    padding: 0;
+    padding: ${Variables.sizes.xxsmall}rem;
     border: 0;
-    margin: 0;
     background-color: transparent;
     position: relative;
     transform: rotate(0deg);
@@ -34,16 +33,16 @@ export const StMenuButton = styled.button`
 `
 
 export const StBar = styled.span<StBarProps>`
-    width: 100%;
-    height: 0.35rem;
+    width: calc(100% - ${Variables.sizes.xxsmall * 2}rem);
+    height: ${Variables.sizes.xxsmall}rem;
     padding: 0;
     margin: 0;
     display: block;
     position: absolute;
     background: ${Variables.colors.white};
-    border-radius: 0.5rem;
+    border-radius: ${Variables.sizes.xxsmall}rem;
     opacity: 1;
-    left: 0;
+    left: ${Variables.sizes.xxsmall}rem;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -58,23 +57,23 @@ export const StBar = styled.span<StBarProps>`
             width: 0%;
             left: 50%;
         ` : `
-            top: 0;
+            top: 0.05rem;
         `}
     }
     &:nth-child(2) {
         ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             transform: rotate(45deg);
-            top: 0.7rem;
+            top: 0.75rem;
         ` : `
-            top: 0.7rem;
+            top: 0.75rem;
         `}
     }
     &:nth-child(3) {
         ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             transform: rotate(-45deg);
-            top: 0.7rem;
+            top: 0.75rem;
         ` : `
-            top: 0.7rem;
+            top: 0.75rem;
         `}
     }
     &:nth-child(4) {
@@ -82,7 +81,7 @@ export const StBar = styled.span<StBarProps>`
             width: 0%;
             left: 50%;
         ` : `
-            top: 1.4rem;
+            top: 1.45rem;
         `}
     }
 `

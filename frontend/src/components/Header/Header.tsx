@@ -3,7 +3,8 @@ import { Navbar } from '../Navbar'
 import { Button, MenuButton } from '../Button'
 import { Container } from '../Container'
 import { Searchbar } from '../Searchbar'
-import { StCategory, StHeader, StLogo, StMenu, StSection } from './Header.styled'
+import { Icon } from '../Icon'
+import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StMenu, StSection } from './Header.styled'
 
 export type MenuProps = {
     children?: ReactNode
@@ -21,13 +22,27 @@ export const Header = () => {
                     <StSection>
                         <StLogo>Brick Store</StLogo>
                         {innerWidth < 480 ? 
-                            <>
+                            <StHeaderButtons>
+                                 <StHeaderButton
+                                    onClick={() => console.log('search')}
+                                >
+                                    <Icon 
+                                        name = 'magnifying-glass'
+                                    />
+                                </StHeaderButton>
+                                <StHeaderButton
+                                    onClick={() => console.log('Cart')}
+                                >
+                                    <Icon 
+                                        name = 'shopping-cart'
+                                    />
+                                </StHeaderButton>
                                 <MenuButton 
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                />
+                                    />
                                 <StMenu
                                     isMenuOpen={isMenuOpen}
-                                >
+                                    >
                                     <li>
                                         <StCategory
                                             href='/Bricks'
@@ -38,31 +53,31 @@ export const Header = () => {
                                     <li>
                                         <StCategory
                                             href='/Plates'
-                                        >
+                                            >
                                             Plates
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
                                             href='/Minifigs'
-                                        >
+                                            >
                                             Minifigs
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
                                             href='/Other'
-                                        >
+                                            >
                                             Other
                                         </StCategory>
                                     </li>
                                 </StMenu>
-                            </>
+                            </StHeaderButtons>
                         :
                             <>
                                 <Searchbar
                                     onSearch={(e) => console.log(e)}
-                                />
+                                    />
                                 <Button
                                     faIconLeft='shopping-cart'
                                     type='secondary'

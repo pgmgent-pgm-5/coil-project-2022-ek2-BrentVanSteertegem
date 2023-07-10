@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Variables } from '../../style'
 import { MenuProps } from './Header'
+import { StButton } from '../Button/Button.styled'
 
 export const StHeader = styled.header`
     background-color: ${Variables.colors.primary};
@@ -18,6 +19,17 @@ export const StLogo = styled.h2`
     text-transform: uppercase;
     padding: 0 0.3rem 0 0.1rem;
     width: 11.35rem;
+`
+
+export const StHeaderButtons = styled.section`
+    align-items: center;
+    gap: 0.5rem;
+`
+
+export const StHeaderButton = styled(StButton)`
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    padding: 0.25rem;
 `
 
 export const StMenu = styled.ul<MenuProps>`

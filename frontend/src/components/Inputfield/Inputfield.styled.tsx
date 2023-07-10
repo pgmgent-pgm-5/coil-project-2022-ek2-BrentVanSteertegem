@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import { Variables } from '../../style'
 
 export const StInputfield = styled.input`
-    padding: 0.5rem;
+    padding: ${Variables.spacing.small}rem ${Variables.spacing.xsmall}rem;
     border: 0;
-    border-radius: 0.25rem;
+    border-radius: ${Variables.rounded.small}rem;
     width: 100%;
-    font-size: 0.9rem;
-    line-height: 0.9rem;
+    font-size: ${Variables.textSizes.small}rem;
+    line-height: ${Variables.textSizes.small}rem;
+    height: ${Variables.textSizes.small}rem;
 
     &:focus {
         outline: none;

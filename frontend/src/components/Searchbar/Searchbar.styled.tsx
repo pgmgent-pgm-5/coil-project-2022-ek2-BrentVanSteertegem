@@ -6,26 +6,26 @@ export const StForm = styled.form`
     display: flex;
     margin: 0;
     width: 30rem;
-    max-width: calc(100% - 17.55rem);
+    max-width: calc(100% - 23.08rem);
     background-color: ${Variables.colors.white};
-    border-radius: 0.25rem;
+    border-radius: ${Variables.rounded.small}rem;
     margin: 1rem 0;
     align-items: center;
 `
 
 export const StSearchbar = styled(StInputfield)`
-    border-radius: 0.25rem 0 0 0.25rem;
+    border-radius: ${Variables.rounded.small}rem 0 0 ${Variables.rounded.small}rem;
     margin: 0;
     padding-right: 0;
 `
 
 export const StSearchButton = styled.button`
-    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    padding: ${Variables.spacing.xsmall}rem ${Variables.spacing.small}rem ${Variables.spacing.xsmall}rem ${Variables.spacing.xsmall}rem;
     border: 0;
-    border-radius: 0 0.25rem 0.25rem 0;
+    border-radius: 0 ${Variables.rounded.small}rem ${Variables.rounded.small}rem 0;
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 0.9rem;
+    font-size: ${Variables.textSizes.small}rem;
+    line-height: ${Variables.textSizes.small}rem;
     background-color: ${Variables.colors.white};
     color: ${Variables.colors.placeHolder};
 `

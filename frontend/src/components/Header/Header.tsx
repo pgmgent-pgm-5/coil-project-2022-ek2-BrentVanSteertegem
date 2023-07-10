@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { Navbar } from '../Navbar'
-import { MenuButton } from '../Button'
+import { Button, MenuButton } from '../Button'
 import { Container } from '../Container'
 import { Searchbar } from '../Searchbar'
 import { StCategory, StHeader, StLogo, StMenu, StSection } from './Header.styled'
@@ -63,7 +63,13 @@ export const Header = () => {
                                 <Searchbar
                                     onSearch={(e) => console.log(e)}
                                 />
-                                <p>Cart</p>
+                                <Button
+                                    faIconLeft='shopping-cart'
+                                    type='secondary'
+                                    onClick={() => console.log('Cart')}
+                                >
+                                    Cart
+                                </Button>
                             </>
                         }
                     </StSection>

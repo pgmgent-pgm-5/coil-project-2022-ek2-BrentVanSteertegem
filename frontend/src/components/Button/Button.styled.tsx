@@ -2,6 +2,24 @@ import styled from 'styled-components'
 import { Variables } from '../../style'
 import { StBarProps } from './MenuButton'
 
+export const StButton = styled.button`
+    display: flex;
+    align-items: center;
+    gap: ${Variables.spacing.small}rem;
+    padding: ${Variables.spacing.small}rem ${Variables.spacing.medium}rem;
+    border: 0;
+    border-radius: ${Variables.rounded.small}rem;
+    font-size: ${Variables.textSizes.small}rem;
+    line-height: ${Variables.textSizes.small}rem;
+    background-color: ${Variables.colors.primary};
+    color: ${Variables.colors.white};
+`
+
+export const StButtonSecondary = styled(StButton)`
+    background-color: ${Variables.colors.secondary};
+    color: ${Variables.colors.text};
+`
+
 export const StMenuButton = styled.button`
     width: 2rem;
     height: 1.75rem;
@@ -36,7 +54,7 @@ export const StBar = styled.span<StBarProps>`
     transition: .25s ease-in-out;
 
     &:nth-child(1) {
-        ${({ isMenuOpen }) => isMenuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             width: 0%;
             left: 50%;
         ` : `
@@ -44,7 +62,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(2) {
-        ${({ isMenuOpen }) => isMenuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             transform: rotate(45deg);
             top: 0.7rem;
         ` : `
@@ -52,7 +70,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(3) {
-        ${({ isMenuOpen }) => isMenuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             transform: rotate(-45deg);
             top: 0.7rem;
         ` : `
@@ -60,7 +78,7 @@ export const StBar = styled.span<StBarProps>`
         `}
     }
     &:nth-child(4) {
-        ${({ isMenuOpen }) => isMenuOpen ? `
+        ${({ isMenuOpen }) => isMenuOpen && isMenuOpen ? `
             width: 0%;
             left: 50%;
         ` : `

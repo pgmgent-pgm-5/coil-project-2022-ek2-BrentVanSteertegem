@@ -3,7 +3,6 @@ const Colors = {
     black: '#000',
     red: '#e00',
     darkRed: '#c00',
-    yellow: '#fe0',
     grey: '#777',
 }
   
@@ -13,19 +12,27 @@ const Fonts = {
 }
 
 const Sizes = {
+    xxsmall: 0.25,
+    xsmall: 0.5,
+    small: 0.75,
+    nearlyMedium: 0.9,
     medium: 1,
     container: 80,
 }
   
 const TextSizes = {
+    small: Sizes.nearlyMedium,
     medium: Sizes.medium,
 }
   
 const Spacing = {
+    xsmall: Sizes.xsmall,
+    small: Sizes.small,
     medium: Sizes.medium,
 }
   
 const Rounded = {
+    small: Sizes.xxsmall,
     medium: Sizes.medium,
 }
   
@@ -34,7 +41,7 @@ export const Variables = {
         ...Colors,
         primary: Colors.red,
         primaryDark: Colors.darkRed,
-        secondary: Colors.yellow,
+        secondary: Colors.white,
         text: Colors.black,
         placeHolder: Colors.grey,
         logoText: Colors.white,

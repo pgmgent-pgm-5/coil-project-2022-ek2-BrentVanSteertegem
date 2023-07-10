@@ -9,6 +9,7 @@ export const StHeader = styled.header`
 export const StSection = styled.section`
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
 `
 
 export const StLogo = styled.h2`

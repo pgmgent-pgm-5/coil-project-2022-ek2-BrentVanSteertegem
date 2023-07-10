@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { Navbar } from '../Navbar'
 import { MenuButton } from '../Button'
 import { Container } from '../Container'
+import { Searchbar } from '../Searchbar'
 import { StCategory, StHeader, StLogo, StMenu, StSection } from './Header.styled'
 
 export type MenuProps = {
@@ -19,7 +20,7 @@ export const Header = () => {
                 <Container>
                     <StSection>
                         <StLogo>Brick Store</StLogo>
-                        {innerWidth < 480 && 
+                        {innerWidth < 480 ? 
                             <>
                                 <MenuButton 
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -56,6 +57,13 @@ export const Header = () => {
                                         </StCategory>
                                     </li>
                                 </StMenu>
+                            </>
+                        :
+                            <>
+                                <Searchbar
+                                    onSearch={(e) => console.log(e)}
+                                />
+                                <p>Cart</p>
                             </>
                         }
                     </StSection>

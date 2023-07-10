@@ -1,3 +1,6 @@
 export * from './Container'
 export * from './Header'
+export * from './Icon'
+export * from './Inputfield'
 export * from './Navbar'
+export * from './Searchbar'

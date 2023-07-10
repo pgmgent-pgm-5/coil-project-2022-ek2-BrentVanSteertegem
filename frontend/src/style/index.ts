@@ -4,6 +4,7 @@ const Colors = {
     red: '#e00',
     darkRed: '#c00',
     yellow: '#fe0',
+    grey: '#777',
 }
   
 const Fonts = {
@@ -35,6 +36,7 @@ export const Variables = {
         primaryDark: Colors.darkRed,
         secondary: Colors.yellow,
         text: Colors.black,
+        placeHolder: Colors.grey,
         logoText: Colors.white,
         buttonText: Colors.white,
     },

@@ -16,6 +16,7 @@ export const StLogo = styled.h2`
     color: ${Variables.colors.white};
     text-transform: uppercase;
     padding: 0 0.3rem 0 0.1rem;
+    width: 11.35rem;
 `
 
 export const StMenu = styled.ul<MenuProps>`
@@ -25,7 +26,7 @@ export const StMenu = styled.ul<MenuProps>`
     margin: 0;
     position: absolute;
     top: 4.75rem;
-    left: ${({ isMenuOpen }) => isMenuOpen ? '0' : '-100vw'};
+    left: ${({ isMenuOpen }: MenuProps) => isMenuOpen ? '0' : '-100vw'};
     background-color: ${Variables.colors.primary};
     transition: 0.3s ease-in;
     display: flex;

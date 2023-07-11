@@ -9,10 +9,13 @@ export const StContainer = styled.div`
 `
 
 export const StAppContainer = styled(StContainer)`
-    min-height: calc(100vh - 22.26rem);
+    min-height: calc(100vh - 38.65rem);
 
     @media (min-width: ${Variables.breakpoints.mobile}rem) {
-        min-height: calc(100vh - 25.82rem);
+        min-height: calc(100vh - 42.21rem);
     }
 
+    @media (min-width: ${Variables.breakpoints.tablet}rem) {
+        min-height: calc(100vh - 31.39rem);
+    }
 `

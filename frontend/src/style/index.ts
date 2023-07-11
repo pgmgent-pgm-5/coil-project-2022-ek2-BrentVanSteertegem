@@ -14,6 +14,7 @@ const Fonts = {
 
 const Breakpoints = {
     mobile: 30,
+    tablet: 50,
 }
 
 const Sizes = {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Variables } from '../../style'
 import { StMenuProps } from './Header'
@@ -49,7 +50,7 @@ export const StMenu = styled.ul<StMenuProps>`
     list-style-type: none;
 `
 
-export const StCategory = styled.a`
+export const StCategory = styled(Link)`
     text-decoration: none;
     font-family: 'Legothick', 'Poppins', sans-serif;
     color: ${Variables.colors.white};

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Icon } from '../Icon'
 import { StFooter, StFooterBottom, StFooterContainer, StFooterItems, StSection, StSocialIcons } from './Footer.styled'
 
@@ -9,32 +10,32 @@ export const Footer = () => {
                     <StFooterItems>
                         <h4>Customer Care</h4>
                         <li>
-                            <a 
-                                href='/FAQ'
+                            <Link 
+                                to='/FAQ'
                             >
                                 Frequently Asked Questions (FAQ)
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a 
-                                href='/return-policy'
+                            <Link 
+                                to='/return-policy'
                             >
                                 Return policy
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a 
-                                href='/shipping'
+                            <Link 
+                                to='/shipping'
                             >
                                 Shipping information
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href='/tracking'
+                            <Link
+                                to='/tracking'
                             >
                                 Order tracking
-                            </a>
+                            </Link>
                         </li>
                     </StFooterItems>
                     <StFooterItems>
@@ -43,79 +44,79 @@ export const Footer = () => {
                             <p>Industrieweg 232, 9030 Gent</p>
                         </li>
                         <li>
-                            <a 
-                                href='tel:' 
+                            <Link 
+                                to='tel:' 
                                 target='_blank'
                             >
                                 +32 471 23 45 67
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href='mailto:brent.vansteertegem@student.arteveldehs.be'
+                            <Link
+                                to='mailto:brent.vansteertegem@student.arteveldehs.be'
                                 target='_blank'
                             >
                                 brent.vansteertegem@student.arteveldehs.be
-                            </a>
+                            </Link>
                         </li>
                     </StFooterItems>
                 </StSection>
                 <StSocialIcons>
-                    <a
-                        href='https://www.facebook.com/'
+                    <Link
+                        to='https://www.facebook.com/'
                         target='_blank'
                     >
                         <Icon
                             isBrandIcon={true}
                             name='facebook-f'
                         />
-                    </a>
-                    <a
-                        href='https://www.messenger.com/'
+                    </Link>
+                    <Link
+                        to='https://www.messenger.com/'
                         target='_blank'
                     >
                         <Icon
                             isBrandIcon={true}
                             name='facebook-messenger'
                         />
-                    </a>
-                    <a
-                        href='https://www.twitter.com/'
+                    </Link>
+                    <Link
+                        to='https://www.twitter.com/'
                         target='_blank'
                     >
                         <Icon
                             isBrandIcon={true}
                             name='twitter'
                         />
-                    </a>
-                    <a
-                        href='https://www.instagram.com/'
+                    </Link>
+                    <Link
+                        to='https://www.instagram.com/'
                         target='_blank'
                     >
                         <Icon
                             isBrandIcon={true}
                             name='instagram'
                         />
-                    </a>
+                    </Link>
                 </StSocialIcons>
                 <StFooterBottom>
-                    <a
-                        href='/terms-and-conditions'
+                    <Link
+                        to='/terms-and-conditions'
                     >
                         Terms &nbsp; conditions
-                    </a>
+                    </Link>
                     <span>|</span>
-                    <a
-                        href='/privacy-policy'
+                    <Link
+                        to='/privacy-policy'
                     >
                         Privacy policy
-                    </a>
+                    </Link>
                     <span>|</span>
-                    <a
-                        href='/sitemap'
+                    <Link
+                        to='/sitemap'
                     >
                         Sitemap
-                    </a>
+                    </Link>
                 </StFooterBottom>
             </StFooterContainer>
         </StFooter>

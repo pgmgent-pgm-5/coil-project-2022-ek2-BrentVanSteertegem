@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Variables } from '../../style'
 
@@ -19,7 +20,7 @@ export const StCategories = styled.ul`
     }
 `
 
-export const StCategory = styled.a`
+export const StCategory = styled(Link)`
     color: ${Variables.colors.white};
     text-decoration: none;
     padding: 1rem;

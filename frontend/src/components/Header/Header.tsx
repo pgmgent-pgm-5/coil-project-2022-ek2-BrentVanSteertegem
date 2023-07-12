@@ -47,28 +47,28 @@ export const Header = () => {
                                     >
                                     <li>
                                         <StCategory
-                                            href='/Bricks'
+                                            to='/Bricks'
                                         >
                                             Bricks
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            href='/Plates'
+                                            to='/Plates'
                                             >
                                             Plates
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            href='/Minifigs'
+                                            to='/Minifigs'
                                             >
                                             Minifigs
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            href='/Other'
+                                            to='/Other'
                                             >
                                             Other
                                         </StCategory>

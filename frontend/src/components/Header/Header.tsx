@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Navbar } from '../Navbar'
 import { Button, MenuButton } from '../Button'
 import { Container } from '../Container'
@@ -7,14 +7,13 @@ import { Icon } from '../Icon'
 import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StMenu, StSection } from './Header.styled'
 import { Variables } from '../../style'
 
-export type MenuProps = {
-    children?: ReactNode
+export type StMenuProps = {
     isMenuOpen: boolean
 }
 
 export const Header = () => {
     const { innerWidth } = window
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
     return (
         <>
@@ -40,7 +39,9 @@ export const Header = () => {
                                 </StHeaderButton>
                                 <MenuButton 
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    />
+                                    isMenuOpen={isMenuOpen}
+                                    setIsMenuOpen={setIsMenuOpen}
+                                />
                                 <StMenu
                                     isMenuOpen={isMenuOpen}
                                     >

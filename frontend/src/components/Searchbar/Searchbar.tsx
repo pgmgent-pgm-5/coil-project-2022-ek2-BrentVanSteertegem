@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { Icon } from '../Icon'
 import { StSearchButton, StSearchbar, StForm } from './Searchbar.styled'
 
@@ -7,11 +7,11 @@ type SearchbarProps = {
 }
 
 export const Searchbar = ({ onSearch }: SearchbarProps) => {
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState<string>('')
 
     return (
         <StForm
-            onSubmit={(e: ChangeEvent) => {
+            onSubmit={(e: FormEvent) => {
                 e.preventDefault()
                 onSearch(search)
             }}

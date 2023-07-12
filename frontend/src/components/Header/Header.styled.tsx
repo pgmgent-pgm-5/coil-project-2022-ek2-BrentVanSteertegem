@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Variables } from '../../style'
-import { MenuProps } from './Header'
+import { StMenuProps } from './Header'
 import { StButton } from '../Button/Button.styled'
 
 export const StHeader = styled.header`
@@ -32,14 +32,14 @@ export const StHeaderButton = styled(StButton)`
     padding: 0.25rem;
 `
 
-export const StMenu = styled.ul<MenuProps>`
+export const StMenu = styled.ul<StMenuProps>`
     width: 100vw;
     height: calc(100vh - 9.5rem);
     padding-bottom: 4.75rem;
     margin: 0;
     position: absolute;
     top: 4.75rem;
-    left: ${({ isMenuOpen }: MenuProps) => isMenuOpen ? '0' : '-100vw'};
+    left: ${({ isMenuOpen }) => isMenuOpen ? '0' : '-100vw'};
     background-color: ${Variables.colors.primary};
     transition: 0.3s ease-in;
     display: flex;

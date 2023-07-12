@@ -40,10 +40,7 @@ export const Footer = () => {
                     <StFooterItems>
                         <h4>Contact Us</h4>
                         <li>
-                            <p>
-                                Industrieweg 232,
-                                9030 Gent
-                            </p>
+                            <p>Industrieweg 232, 9030 Gent</p>
                         </li>
                         <li>
                             <a 

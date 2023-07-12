@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '../Link'
 import { Icon } from '../Icon'
 import { StFooter, StFooterBottom, StFooterContainer, StFooterItems, StSection, StSocialIcons } from './Footer.styled'
 

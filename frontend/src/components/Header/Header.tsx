@@ -4,7 +4,7 @@ import { Button, MenuButton } from '../Button'
 import { Container } from '../Container'
 import { Searchbar } from '../Searchbar'
 import { Icon } from '../Icon'
-import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StMenu, StSection } from './Header.styled'
+import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StLogoLink, StMenu, StSection } from './Header.styled'
 import { Variables } from '../../style'
 
 export type StMenuProps = {
@@ -20,7 +20,11 @@ export const Header = () => {
             <StHeader>
                 <Container>
                     <StSection>
-                        <StLogo>Brick Store</StLogo>
+                        <StLogoLink
+                            to='/'
+                        >
+                            <StLogo>Brick Store</StLogo>
+                        </StLogoLink>
                         {innerWidth < Variables.breakpoints.mobile * 16 ? 
                             <StHeaderButtons>
                                  <StHeaderButton

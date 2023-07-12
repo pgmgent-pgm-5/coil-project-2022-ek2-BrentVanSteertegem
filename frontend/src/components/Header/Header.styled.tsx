@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Variables } from '../../style'
 import { StMenuProps } from './Header'
 import { StButton } from '../Button/Button.styled'
+import { StLink } from '../Link/Link.styled'
 
 export const StHeader = styled.header`
     background-color: ${Variables.colors.primary};
@@ -12,6 +13,10 @@ export const StSection = styled.section`
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+`
+
+export const StLogoLink = styled(StLink)`
+    text-decoration: none;
 `
 
 export const StLogo = styled.h2`

@@ -5,7 +5,7 @@ import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { DefaultLayout } from './components/index.ts'
-import { FAQPage, HomePage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
+import { BricksPage, FAQPage, HomePage, MinifigsPage, OtherProductsPage, PageNotFound, PlatesPage, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -22,8 +22,20 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Route path='terms-and-conditions' element={<TermsAndConditionsPage />} />
             <Route path='privacy-policy' element={<PrivacyPolicyPage />} />
             <Route path='sitemap' element={<SitemapPage />} />
-            <Route path='*' element={<PageNotFound />} />
           </Route>
+          <Route path='bricks' element={<DefaultLayout />}>
+            <Route index element={<BricksPage />} />
+          </Route>
+          <Route path='plates' element={<DefaultLayout />}>
+            <Route index element={<PlatesPage />} />
+          </Route>
+          <Route path='minifigs' element={<DefaultLayout />}>
+            <Route index element={<MinifigsPage />} />
+          </Route>
+          <Route path='other-products' element={<DefaultLayout />}>
+            <Route index element={<OtherProductsPage />} />
+          </Route>
+          <Route path='*' element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

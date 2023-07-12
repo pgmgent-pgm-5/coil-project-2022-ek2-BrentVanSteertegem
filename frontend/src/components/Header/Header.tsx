@@ -31,14 +31,14 @@ export const Header = () => {
                                     onClick={() => console.log('search')}
                                 >
                                     <Icon 
-                                        name = 'magnifying-glass'
+                                        name='magnifying-glass'
                                     />
                                 </StHeaderButton>
                                 <StHeaderButton
                                     onClick={() => console.log('Cart')}
                                 >
                                     <Icon 
-                                        name = 'shopping-cart'
+                                        name='shopping-cart'
                                     />
                                 </StHeaderButton>
                                 <MenuButton 
@@ -51,29 +51,29 @@ export const Header = () => {
                                     >
                                     <li>
                                         <StCategory
-                                            to='/Bricks'
+                                            to='/bricks'
                                         >
                                             Bricks
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            to='/Plates'
-                                            >
+                                            to='/plates'
+                                        >
                                             Plates
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            to='/Minifigs'
-                                            >
+                                            to='/minifigs'
+                                        >
                                             Minifigs
                                         </StCategory>
                                     </li>
                                     <li>
                                         <StCategory
-                                            to='/Other'
-                                            >
+                                            to='/other-products'
+                                        >
                                             Other
                                         </StCategory>
                                     </li>
@@ -83,7 +83,7 @@ export const Header = () => {
                             <>
                                 <Searchbar
                                     onSearch={(e) => console.log(e)}
-                                    />
+                                />
                                 <Button
                                     faIconLeft='shopping-cart'
                                     type='secondary'

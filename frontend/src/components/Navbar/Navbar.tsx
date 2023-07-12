@@ -8,7 +8,7 @@ export const Navbar = () => {
                 <StCategories>
                     <li>
                         <StCategory
-                            to='/Bricks'
+                            to='/bricks'
                         >
                             <StCategoryName>
                                 Bricks
@@ -17,7 +17,7 @@ export const Navbar = () => {
                     </li>
                     <li>
                         <StCategory
-                            to='/Plates'
+                            to='/plates'
                         >
                             <StCategoryName>
                                 Plates
@@ -26,7 +26,7 @@ export const Navbar = () => {
                     </li>
                     <li>
                         <StCategory
-                            to='/Minifigs'
+                            to='/minifigs'
                         >
                             <StCategoryName>
                                 Minifigs
@@ -35,7 +35,7 @@ export const Navbar = () => {
                     </li>
                     <li>
                         <StCategory
-                            to='/Other'
+                            to='/other-products'
                         >
                             <StCategoryName>
                                 Other

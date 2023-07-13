@@ -10,7 +10,12 @@
     "frontend"
   ],
   "scripts": {
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
+    "dev:backend": "yarn workspace @brick-store/backend start:dev",
     "dev:frontend": "yarn workspace @brick-store/frontend dev"
   },
-  "repository": "https://github.com/pgmgent-pgm-5/coil-project-2022-ek2-BrentVanSteertegem"
+  "repository": "https://github.com/pgmgent-pgm-5/coil-project-2022-ek2-BrentVanSteertegem",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
 }

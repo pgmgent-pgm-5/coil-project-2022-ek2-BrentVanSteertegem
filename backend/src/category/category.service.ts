@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 @Injectable()
-export class categoryService {
+export class CategoryService {
   constructor(
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
@@ -54,7 +54,7 @@ export class categoryService {
       name: updateCategoryInput.name,
       mainCategory: mainCategory,
     })
-    return this.categoryRepository.save(category)
+    return this.categoryRepository.save(updatedCategory)
   }
 
   remove(id: number): Promise<Category> {

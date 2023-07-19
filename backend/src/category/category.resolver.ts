@@ -1,12 +1,12 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { categoryService } from './category.service'
+import { CategoryService } from './category.service'
 import { CreateCategoryInput } from './dto/create-category.input'
 import { UpdateCategoryInput } from './dto/update-category.input'
 import { Category } from './entities/category.entity'
 
 @Resolver(() => Category)
-export class categoryResolver {
-  constructor(private readonly categoryService: categoryService) {}
+export class CategoryResolver {
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Mutation(() => Category)
   create(

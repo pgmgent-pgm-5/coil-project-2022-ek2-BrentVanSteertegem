@@ -1,12 +1,12 @@
 import { Controller, Get, Param, Post, Body, Delete, Put } from '@nestjs/common'
-import { categoryService } from './category.service'
+import { CategoryService } from './category.service'
 import { Category } from './entities/category.entity'
 import { CreateCategoryInput } from './dto/create-category.input'
 import { UpdateCategoryInput } from './dto/update-category.input'
 
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: categoryService) {}
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
   getCategories(): Promise<Category[]> {

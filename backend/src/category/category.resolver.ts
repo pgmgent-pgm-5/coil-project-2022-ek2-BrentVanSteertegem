@@ -34,8 +34,8 @@ export class categoryResolver {
   //   return this.categoryService.update(updateCategoryInput.id, updateCategoryInput)
   // }
 
-  // @Mutation('removeCategory')
-  // remove(@Args('id') id: number) {
-  //   return this.categoryService.remove(id)
-  // }
+  @Mutation('removeCategory')
+  remove(@Args('id') id: number): Promise<Category> {
+    return this.categoryService.remove(id)
+  }
 }

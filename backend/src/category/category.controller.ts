@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common'
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common'
 import { categoryService } from './category.service'
 import { Category } from './entities/category.entity'
 import { CreateCategoryInput } from './dto/create-category.input'
@@ -28,5 +28,10 @@ export class CategoryController {
       name: req.name,
       mainCategoryId: req.mainCategoryId,
     })
+  }
+
+  @Delete(':id')
+  deleteCategory(@Param('id') id: number): Promise<Category> {
+    return this.categoryService.remove(id)
   }
 }

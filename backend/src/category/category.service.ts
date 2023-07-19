@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { CreateCategoryInput } from './dto/create-category.input'
-// import { UpdateCategoryInput } from './dto/update-category.input'
+import { UpdateCategoryInput } from './dto/update-category.input'
 import { Category } from './entities/category.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -43,9 +43,19 @@ export class categoryService {
     })
   }
 
-  // update(id: number, updateCategoryInput: UpdateCategoryInput) {
-  //   return `This action updates a #${id} category`
-  // }
+  async update(updateCategoryInput: UpdateCategoryInput): Promise<Category> {
+    const mainCategory = await this.categoryRepository.findOne({
+      where: { id: updateCategoryInput.mainCategoryId },
+    })
+    const category = await this.categoryRepository.findOne({
+      where: { id: updateCategoryInput.id },
+    })
+    const updatedCategory = this.categoryRepository.merge(category, {
+      name: updateCategoryInput.name,
+      mainCategory: mainCategory,
+    })
+    return this.categoryRepository.save(category)
+  }
 
   remove(id: number): Promise<Category> {
     const category = this.categoryRepository.findOne({

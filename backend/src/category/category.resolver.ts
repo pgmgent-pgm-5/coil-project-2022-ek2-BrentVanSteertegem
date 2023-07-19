@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import { categoryService } from './category.service'
 import { CreateCategoryInput } from './dto/create-category.input'
+import { UpdateCategoryInput } from './dto/update-category.input'
 import { Category } from './entities/category.entity'
 
 @Resolver(() => Category)
@@ -29,10 +30,12 @@ export class categoryResolver {
     return this.categoryService.findOneByName(name)
   }
 
-  // @Mutation('updateCategory')
-  // update(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
-  //   return this.categoryService.update(updateCategoryInput.id, updateCategoryInput)
-  // }
+  @Mutation('updateCategory')
+  update(
+    @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
+  ): Promise<Category> {
+    return this.categoryService.update(updateCategoryInput)
+  }
 
   @Mutation('removeCategory')
   remove(@Args('id') id: number): Promise<Category> {

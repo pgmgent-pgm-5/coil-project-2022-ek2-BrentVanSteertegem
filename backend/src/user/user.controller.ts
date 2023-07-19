@@ -13,9 +13,14 @@ export class userController {
     return this.userService.findAll()
   }
 
-  @Get(':id')
+  @Get('id=:id')
   getuserById(@Param('id') id: number): Promise<User> {
     return this.userService.findOneById(id)
+  }
+
+  @Get(':email')
+  getuserByEmail(@Param('email') email: string): Promise<User> {
+    return this.userService.findOneByEmail(email)
   }
 
   @Post()

@@ -44,16 +44,20 @@ export class CategoryService {
   }
 
   async update(updateCategoryInput: UpdateCategoryInput): Promise<Category> {
+    const { id, mainCategoryId, ...fieldsToUpdate } = updateCategoryInput
+
     const mainCategory = await this.categoryRepository.findOne({
       where: { id: updateCategoryInput.mainCategoryId },
     })
     const category = await this.categoryRepository.findOne({
-      where: { id: updateCategoryInput.id },
+      where: { id: id },
+      relations: ['mainCategory'],
     })
     const updatedCategory = this.categoryRepository.merge(category, {
-      name: updateCategoryInput.name,
-      mainCategory: mainCategory,
+      ...fieldsToUpdate,
+      mainCategory,
     })
+
     return this.categoryRepository.save(updatedCategory)
   }
 

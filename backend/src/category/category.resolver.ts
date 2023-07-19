@@ -8,24 +8,24 @@ import { Category } from './entities/category.entity'
 export class CategoryResolver {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Mutation(() => Category)
+  @Mutation(() => Category, { name: 'createCategory' })
   create(
     @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
   ): Promise<Category> {
     return this.categoryService.create(createCategoryInput)
   }
 
-  @Query(() => [Category], { name: 'categories' })
+  @Query(() => [Category], { name: 'getCategories' })
   findAll(): Promise<Category[]> {
     return this.categoryService.findAll()
   }
 
-  @Query('categoryById')
+  @Query('getCategoryById')
   findOneById(@Args('id') id: number): Promise<Category> {
     return this.categoryService.findOneById(id)
   }
 
-  @Query('categoryByName')
+  @Query('getCategoryByName')
   findOne(@Args('name') name: string): Promise<Category> {
     return this.categoryService.findOneByName(name)
   }

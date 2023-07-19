@@ -25,10 +25,7 @@ export class CategoryController {
 
   @Post()
   postCategory(@Body() req: CreateCategoryInput): Promise<Category> {
-    return this.categoryService.create({
-      name: req.name,
-      mainCategoryId: req.mainCategoryId,
-    })
+    return this.categoryService.create(req)
   }
 
   @Put(':id')
@@ -38,8 +35,7 @@ export class CategoryController {
   ): Promise<Category> {
     return this.categoryService.update({
       id: id,
-      name: req.name,
-      mainCategoryId: req.mainCategoryId,
+      ...req,
     })
   }
 

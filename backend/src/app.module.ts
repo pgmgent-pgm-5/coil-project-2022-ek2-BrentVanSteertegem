@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { categoryModule } from './category/category.module'
+import { CategoryController } from './category/category.controller'
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { categoryModule } from './category/category.module'
     }),
     categoryModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, CategoryController],
   providers: [AppService],
 })
 export class AppModule {}

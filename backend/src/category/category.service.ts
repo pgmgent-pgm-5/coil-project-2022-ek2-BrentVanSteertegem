@@ -12,18 +12,36 @@ export class categoryService {
     private categoryRepository: Repository<Category>,
   ) {}
 
-  create(createCategoryInput: CreateCategoryInput): Promise<Category> {
-    const category = this.categoryRepository.create(createCategoryInput)
+  async create(createCategoryInput: CreateCategoryInput): Promise<Category> {
+    const mainCategory = await this.categoryRepository.findOne({
+      where: { id: createCategoryInput.mainCategoryId },
+    })
+    const category = this.categoryRepository.create({
+      name: createCategoryInput.name,
+      mainCategory: mainCategory,
+    })
     return this.categoryRepository.save(category)
   }
 
   findAll(): Promise<Category[]> {
-    return this.categoryRepository.find()
+    return this.categoryRepository.find({
+      relations: ['mainCategory'],
+    })
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} category`
-  // }
+  findOneById(id: number): Promise<Category> {
+    return this.categoryRepository.findOne({
+      where: { id: id },
+      relations: ['mainCategory'],
+    })
+  }
+
+  findOneByName(name: string): Promise<Category> {
+    return this.categoryRepository.findOne({
+      where: { name: name },
+      relations: ['mainCategory'],
+    })
+  }
 
   // update(id: number, updateCategoryInput: UpdateCategoryInput) {
   //   return `This action updates a #${id} category`

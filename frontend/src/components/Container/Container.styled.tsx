@@ -19,3 +19,16 @@ export const StAppContainer = styled(StContainer)`
         min-height: calc(100vh - 31.39rem);
     }
 `
+
+export const StCenteredContainer = styled(StContainer)`
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    min-width: inherit;
+    max-width: inherit;
+    height: inherit;
+    min-height: inherit;
+    max-height: inherit;
+`

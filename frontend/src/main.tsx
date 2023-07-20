@@ -5,7 +5,7 @@ import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { DefaultLayout } from './components/index.ts'
-import { BricksPage, FAQPage, HomePage, MinifigsPage, OtherProductsPage, PageNotFound, PlatesPage, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
+import { BricksPage, FAQPage, HomePage, LoginPage, MinifigsPage, OtherProductsPage, PageNotFound, PlatesPage, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -13,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Routes>
         <Route element={<App />}>
           <Route path='/' element={<DefaultLayout />}>
+          <Route path='admin/login' element={<LoginPage />} />
             <Route index element={<HomePage />} />
             <Route path='home' element={<Navigate to='/' replace={true} />} />
             <Route path='FAQ' element={<FAQPage />} />
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Route path='terms-and-conditions' element={<TermsAndConditionsPage />} />
             <Route path='privacy-policy' element={<PrivacyPolicyPage />} />
             <Route path='sitemap' element={<SitemapPage />} />
+            <Route path='*' element={<PageNotFound />} />
           </Route>
           <Route path='bricks' element={<DefaultLayout />}>
             <Route index element={<BricksPage />} />
@@ -35,7 +37,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path='other-products' element={<DefaultLayout />}>
             <Route index element={<OtherProductsPage />} />
           </Route>
-          <Route path='*' element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

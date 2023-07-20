@@ -3,6 +3,7 @@ import { UserService } from './user.service'
 import { User } from './entities/user.entity'
 import { CreateUserInput } from './dto/create-user.input'
 import { UpdateUserInput } from './dto/update-user.input'
+import { Public } from 'src/auth/auth.guard'
 
 @Controller('user')
 export class userController {
@@ -23,6 +24,7 @@ export class userController {
     return this.userService.findOneByEmail(email)
   }
 
+  @Public()
   @Post()
   postuser(@Body() req: CreateUserInput): Promise<User> {
     return this.userService.create(req)

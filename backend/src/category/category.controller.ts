@@ -3,11 +3,13 @@ import { CategoryService } from './category.service'
 import { Category } from './entities/category.entity'
 import { CreateCategoryInput } from './dto/create-category.input'
 import { UpdateCategoryInput } from './dto/update-category.input'
+import { Public } from 'src/auth/auth.guard'
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @Public()
   @Get()
   getCategories(): Promise<Category[]> {
     return this.categoryService.findAll()
@@ -18,6 +20,7 @@ export class CategoryController {
     return this.categoryService.findOneById(id)
   }
 
+  @Public()
   @Get(':name')
   getCategoryByName(@Param('name') name: string): Promise<Category> {
     return this.categoryService.findOneByName(name)

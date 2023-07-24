@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
+import dns from 'dns'
 import react from '@vitejs/plugin-react'
 import Unfonts from 'unplugin-fonts/vite'
+
+dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
   plugins: [
@@ -20,7 +23,7 @@ export default defineConfig({
         display: 'auto',
         preload: true,
         injectTo: 'head',
-      }
-    }),  
+      },
+    }),
   ],
 })

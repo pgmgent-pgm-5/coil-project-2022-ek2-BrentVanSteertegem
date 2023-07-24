@@ -3,6 +3,7 @@ import { CategoryService } from './category.service'
 import { CreateCategoryInput } from './dto/create-category.input'
 import { UpdateCategoryInput } from './dto/update-category.input'
 import { Category } from './entities/category.entity'
+import { Public } from 'src/auth/auth.guard'
 
 @Resolver(() => Category)
 export class CategoryResolver {
@@ -15,6 +16,7 @@ export class CategoryResolver {
     return this.categoryService.create(createCategoryInput)
   }
 
+  @Public()
   @Query(() => [Category], { name: 'getCategories' })
   findAll(): Promise<Category[]> {
     return this.categoryService.findAll()
@@ -25,6 +27,7 @@ export class CategoryResolver {
     return this.categoryService.findOneById(id)
   }
 
+  @Public()
   @Query(() => Category, { name: 'getCategoryByName' })
   findOne(@Args('name') name: string): Promise<Category> {
     return this.categoryService.findOneByName(name)

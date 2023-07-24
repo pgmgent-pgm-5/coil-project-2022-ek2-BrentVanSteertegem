@@ -20,24 +20,24 @@ export class UserResolver {
     return this.userService.findAll()
   }
 
-  @Query('getUserById')
+  @Query(() => User, { name: 'getUserById' })
   findOneById(@Args('id') id: number): Promise<User> {
     return this.userService.findOneById(id)
   }
 
-  @Query('getUserByEmail')
+  @Query(() => User, { name: 'getUserByEmail' })
   findOneByEmail(@Args('email') email: string): Promise<User> {
     return this.userService.findOneByEmail(email)
   }
 
-  @Mutation('updateUser')
+  @Mutation(() => User, { name: 'updateUser' })
   update(
     @Args('updateUserInput') updateUserInput: UpdateUserInput,
   ): Promise<User> {
     return this.userService.update(updateUserInput)
   }
 
-  @Mutation('removeUser')
+  @Mutation(() => User, { name: 'removeUser' })
   remove(@Args('id') id: number): Promise<User> {
     return this.userService.remove(id)
   }

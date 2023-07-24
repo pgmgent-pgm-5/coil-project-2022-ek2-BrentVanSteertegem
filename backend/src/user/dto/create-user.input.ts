@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql'
-import Role from 'src/role/Role'
+import { Role } from '../../role.enum'
 import { Column } from 'typeorm'
 
 @InputType()

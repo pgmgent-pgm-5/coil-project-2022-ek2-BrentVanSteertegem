@@ -20,24 +20,24 @@ export class CategoryResolver {
     return this.categoryService.findAll()
   }
 
-  @Query('getCategoryById')
+  @Query(() => Category, { name: 'getCategoryById' })
   findOneById(@Args('id') id: number): Promise<Category> {
     return this.categoryService.findOneById(id)
   }
 
-  @Query('getCategoryByName')
+  @Query(() => Category, { name: 'getCategoryByName' })
   findOne(@Args('name') name: string): Promise<Category> {
     return this.categoryService.findOneByName(name)
   }
 
-  @Mutation('updateCategory')
+  @Mutation(() => Category, { name: 'updateCategory' })
   update(
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
   ): Promise<Category> {
     return this.categoryService.update(updateCategoryInput)
   }
 
-  @Mutation('removeCategory')
+  @Mutation(() => Category, { name: 'removeCategory' })
   remove(@Args('id') id: number): Promise<Category> {
     return this.categoryService.remove(id)
   }

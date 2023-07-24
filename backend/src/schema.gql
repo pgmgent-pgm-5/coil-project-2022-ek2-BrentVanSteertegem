@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: Int!
+  name: String!
+  mainCategory: Category
+}
+
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: Role!
+}
+
+enum Role {
+  ADMIN
+  GUEST
+}
+
+type Query {
+  getCategories: [Category!]!
+  getCategoryById(id: Float!): Category!
+  getCategoryByName(name: String!): Category!
+  getUsers: [User!]!
+  getUserById(id: Float!): User!
+  getUserByEmail(email: String!): User!
+}
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id: Float!): Category!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Float!): User!
+}
+
+input CreateCategoryInput {
+  name: String!
+  mainCategoryId: Int
+}
+
+input UpdateCategoryInput {
+  id: Int!
+  name: String
+  mainCategoryId: Int
+}
+
+input CreateUserInput {
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  role: Role!
+}
+
+input UpdateUserInput {
+  id: Int!
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  role: Role
+}

@@ -10,6 +10,7 @@
     "frontend"
   ],
   "scripts": {
+    "seed": "yarn workspace @brick-store/backend seed",
     "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
     "dev:backend": "yarn workspace @brick-store/backend start:dev",
     "dev:frontend": "yarn workspace @brick-store/frontend dev",

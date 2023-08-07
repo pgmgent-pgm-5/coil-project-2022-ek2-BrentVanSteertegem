@@ -2,10 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Brick {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  category: Category!
+  images: [String!]!
+}
+
 type Category {
   id: Int!
   name: String!
   mainCategory: Category
+  bricks: [Brick!]
 }
 
 type User {
@@ -29,6 +39,8 @@ type Query {
   getUsers: [User!]!
   getUserById(id: Float!): User!
   getUserByEmail(email: String!): User!
+  getBricks: [Brick!]!
+  getBrickById(id: Float!): Brick!
 }
 
 type Mutation {
@@ -38,6 +50,9 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Float!): User!
+  createBrick(createBrickInput: CreateBrickInput!): Brick!
+  updateBrick(updateBrickInput: UpdateBrickInput!): Brick!
+  removeBrick(id: Float!): Brick!
 }
 
 input CreateCategoryInput {
@@ -66,4 +81,23 @@ input UpdateUserInput {
   email: String
   password: String
   role: Role
+}
+
+input CreateBrickInput {
+  name: String!
+  description: String
+  price: Float!
+  categoryId: Int!
+  images: [String!]!
+  variationIds: [Int!]
+}
+
+input UpdateBrickInput {
+  id: Int!
+  name: String
+  description: String
+  price: Float
+  categoryId: Int
+  images: [String!]
+  variationIds: [Int!]
 }

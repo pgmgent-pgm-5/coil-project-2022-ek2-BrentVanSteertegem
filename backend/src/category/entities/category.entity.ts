@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm'
 import { Field, ObjectType, Int } from '@nestjs/graphql'
+import { Brick } from 'src/brick/entities/brick.entity'
 
 @Entity()
 @ObjectType()
@@ -17,4 +24,8 @@ export class Category {
   })
   @Field(() => Category, { nullable: true })
   mainCategory: Category
+
+  @OneToMany(() => Brick, (brick) => brick.category, { nullable: true })
+  @Field(() => [Brick], { nullable: true })
+  bricks?: Brick[]
 }

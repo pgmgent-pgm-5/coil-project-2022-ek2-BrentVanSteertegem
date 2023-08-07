@@ -4,14 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { CategoryModule } from './category/category.module'
-import { CategoryController } from './category/category.controller'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
-import { userController } from './user/user.controller'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo'
 import { join } from 'path'
-
+import { BrickModule } from './brick/brick.module'
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -41,8 +39,9 @@ import { join } from 'path'
     CategoryModule,
     AuthModule,
     UserModule,
+    BrickModule,
   ],
-  controllers: [AppController, CategoryController, userController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

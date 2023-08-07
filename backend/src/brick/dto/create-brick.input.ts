@@ -16,6 +16,10 @@ export class CreateBrickInput {
   price: number
 
   @Column()
+  @Field(() => String)
+  color: string
+
+  @Column()
   @Field(() => Int)
   categoryId?: number
 

@@ -20,6 +20,10 @@ export class UpdateBrickInput {
   price?: number
 
   @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  color?: string
+
+  @Column({ nullable: true })
   @Field(() => Int, { nullable: true })
   categoryId?: number
 

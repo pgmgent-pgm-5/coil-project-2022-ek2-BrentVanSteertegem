@@ -28,6 +28,10 @@ export class Brick {
   @Field(() => Float)
   price: number
 
+  @Column()
+  @Field(() => String)
+  color: string
+
   @ManyToOne(() => Category, (category) => category.bricks, {
     onDelete: 'CASCADE',
   })

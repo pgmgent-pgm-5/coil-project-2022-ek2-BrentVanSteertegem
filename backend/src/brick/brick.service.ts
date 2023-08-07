@@ -19,38 +19,57 @@ export class BrickService {
     const category = await this.categoryService.findOneById(
       createBrickInput.categoryId,
     )
+
+    const variations = await Promise.all(
+      createBrickInput.variationIds.map(async (variation) => {
+        return await this.brickRepository.findOne({
+          where: { id: variation },
+          relations: ['category', 'variations'],
+        })
+      }),
+    )
+
     const brick = this.brickRepository.create({
       name: createBrickInput.name,
       description: createBrickInput.description,
       price: createBrickInput.price,
       category: category,
       images: createBrickInput.images,
+      variations: variations,
     })
     await this.brickRepository.save(brick)
 
     return this.brickRepository.findOne({
       where: { id: brick.id },
-      relations: ['category'],
+      relations: ['category', 'variations'],
     })
   }
 
   findAll(): Promise<Brick[]> {
-    console.log('method called')
     return this.brickRepository.find({
-      relations: ['category'],
+      relations: ['category', 'variations'],
     })
   }
 
   findOne(id: number): Promise<Brick> {
     return this.brickRepository.findOne({
       where: { id: id },
-      relations: ['category'],
+      relations: ['category', 'variations'],
     })
   }
 
   async update(updateBrickInput: UpdateBrickInput): Promise<Brick> {
     const category = await this.categoryService.findOneById(
       updateBrickInput.categoryId,
+    )
+
+    const variations = await Promise.all(
+      updateBrickInput.variationIds.map(async (variation) => {
+        return await this.brickRepository.findOne({
+          where: { id: variation },
+          relations: ['category', 'variations'],
+        })
+      }),
     )
 
     const brick = await this.brickRepository.save({
@@ -60,18 +79,19 @@ export class BrickService {
       price: updateBrickInput.price,
       category: category,
       images: updateBrickInput.images,
+      variations: variations,
     })
 
     return this.brickRepository.findOne({
       where: { id: updateBrickInput.id },
-      relations: ['category'],
+      relations: ['category', 'variations'],
     })
   }
 
   remove(id: number): Promise<Brick> {
     const brick = this.brickRepository.findOne({
       where: { id: id },
-      relations: ['category'],
+      relations: ['category', 'variations'],
     })
     this.brickRepository.delete(id)
     return brick

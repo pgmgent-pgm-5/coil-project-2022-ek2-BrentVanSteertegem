@@ -1,6 +1,13 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
 import { Category } from 'src/category/entities/category.entity'
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm'
 
 @Entity()
 @ObjectType()
@@ -30,4 +37,9 @@ export class Brick {
   @Column('text', { array: true })
   @Field(() => [String])
   images: string[]
+
+  @ManyToMany(() => Brick)
+  @JoinTable()
+  @Field(() => [Brick])
+  variations: Brick[]
 }

@@ -9,6 +9,7 @@ type Brick {
   price: Float!
   category: Category!
   images: [String!]!
+  variations: [Brick!]!
 }
 
 type Category {

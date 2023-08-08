@@ -5,7 +5,7 @@ import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { DefaultLayout } from './components/index.ts'
-import { BricksPage, FAQPage, HomePage, LoginPage, MinifigsPage, OtherProductsPage, PageNotFound, PlatesPage, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
+import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
@@ -37,16 +37,16 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               <Route path='*' element={<PageNotFound />} />
             </Route>
             <Route path='bricks' element={<DefaultLayout />}>
-              <Route index element={<BricksPage />} />
+              <Route index element={<ProductsPage />} />
             </Route>
             <Route path='plates' element={<DefaultLayout />}>
-              <Route index element={<PlatesPage />} />
+              <Route index element={<ProductsPage />} />
             </Route>
             <Route path='minifigs' element={<DefaultLayout />}>
-              <Route index element={<MinifigsPage />} />
+              <Route index element={<ProductsPage />} />
             </Route>
             <Route path='other-products' element={<DefaultLayout />}>
-              <Route index element={<OtherProductsPage />} />
+              <Route index element={<ProductsPage />} />
             </Route>
           </Route>
         </Routes>

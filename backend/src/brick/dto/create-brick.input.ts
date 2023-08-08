@@ -21,6 +21,10 @@ export class CreateBrickInput {
 
   @Column()
   @Field(() => Int)
+  quantity: number
+
+  @Column()
+  @Field(() => Int)
   categoryId?: number
 
   @Column()

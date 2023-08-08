@@ -25,6 +25,10 @@ export class UpdateBrickInput {
 
   @Column({ nullable: true })
   @Field(() => Int, { nullable: true })
+  quantity?: number
+
+  @Column({ nullable: true })
+  @Field(() => Int, { nullable: true })
   categoryId?: number
 
   @Column({ nullable: true })

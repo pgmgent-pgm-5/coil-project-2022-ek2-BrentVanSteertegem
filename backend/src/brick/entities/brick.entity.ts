@@ -32,6 +32,10 @@ export class Brick {
   @Field(() => String)
   color: string
 
+  @Column()
+  @Field(() => Int)
+  quantity: number
+
   @ManyToOne(() => Category, (category) => category.bricks, {
     onDelete: 'CASCADE',
   })

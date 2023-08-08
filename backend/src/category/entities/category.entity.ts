@@ -6,7 +6,7 @@ import {
   OneToMany,
 } from 'typeorm'
 import { Field, ObjectType, Int } from '@nestjs/graphql'
-import { Brick } from 'src/brick/entities/brick.entity'
+import { Brick } from '../../brick/entities/brick.entity'
 
 @Entity()
 @ObjectType()

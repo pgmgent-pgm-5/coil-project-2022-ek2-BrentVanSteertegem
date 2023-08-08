@@ -65,16 +65,18 @@ export class BrickService {
       updateBrickInput.categoryId,
     )
 
-    const variations = await Promise.all(
-      updateBrickInput.variationIds.map(async (variation) => {
-        return await this.brickRepository.findOne({
-          where: { id: variation },
-          relations: ['category', 'variations'],
-        })
-      }),
-    )
+    const variations =
+      updateBrickInput.variationIds &&
+      (await Promise.all(
+        updateBrickInput.variationIds.map(async (variation) => {
+          return await this.brickRepository.findOne({
+            where: { id: variation },
+            relations: ['category', 'variations'],
+          })
+        }),
+      ))
 
-    const brick = await this.brickRepository.save({
+    await this.brickRepository.save({
       id: updateBrickInput.id,
       name: updateBrickInput.name,
       description: updateBrickInput.description,

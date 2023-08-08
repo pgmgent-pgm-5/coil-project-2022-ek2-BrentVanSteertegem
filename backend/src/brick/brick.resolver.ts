@@ -22,6 +22,7 @@ export class BrickResolver {
     return this.brickService.findAll()
   }
 
+  @Public()
   @Query(() => Brick, { name: 'getBrickById' })
   findOne(@Args('id') id: number): Promise<Brick> {
     return this.brickService.findOne(id)

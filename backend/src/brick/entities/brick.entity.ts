@@ -1,5 +1,5 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
-import { Category } from 'src/category/entities/category.entity'
+import { Category } from '../../category/entities/category.entity'
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -24,7 +24,7 @@ export class Brick {
   @Field(() => String)
   description: string
 
-  @Column()
+  @Column('decimal', { precision: 2 })
   @Field(() => Float)
   price: number
 

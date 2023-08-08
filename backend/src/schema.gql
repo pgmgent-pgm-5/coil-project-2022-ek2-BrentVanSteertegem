@@ -7,6 +7,8 @@ type Brick {
   name: String!
   description: String!
   price: Float!
+  color: String!
+  quantity: Int!
   category: Category!
   images: [String!]!
   variations: [Brick!]!
@@ -88,6 +90,8 @@ input CreateBrickInput {
   name: String!
   description: String
   price: Float!
+  color: String!
+  quantity: Int!
   categoryId: Int!
   images: [String!]!
   variationIds: [Int!]
@@ -98,6 +102,8 @@ input UpdateBrickInput {
   name: String
   description: String
   price: Float
+  color: String
+  quantity: Int
   categoryId: Int
   images: [String!]
   variationIds: [Int!]

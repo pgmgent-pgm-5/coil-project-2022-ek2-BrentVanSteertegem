@@ -13,7 +13,7 @@ export const Card = ({ type='brick', item, extraItem }: CardProps) => {
     switch (type) {
         case 'category':
             return item && (
-                <StCard key={item.name}>
+                <StCard>
                     <StImage 
                         src={`/assets/images/${slug}/${extraItem && extraItem.images[0]}`}
                         alt={extraItem && extraItem.name || item.name}

@@ -5,7 +5,7 @@ import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { DefaultLayout } from './components/index.ts'
-import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage } from './pages'
+import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage, ProductPage } from './pages'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { ContextProvider } from './ContextProvider.tsx'
 
@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Routes>
             <Route element={<App />}>
               <Route path='/' element={<DefaultLayout />}>
-              <Route path='admin/login' element={<LoginPage />} />
+                <Route path='admin/login' element={<LoginPage />} />
                 <Route index element={<HomePage />} />
                 <Route path='home' element={<Navigate to='/' replace={true} />} />
                 <Route path='FAQ' element={<FAQPage />} />
@@ -40,15 +40,23 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               </Route>
               <Route path='bricks' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
+                <Route path=':subCategory' element={<ProductsPage />} /> {/* TODO: Add 404 when invalid (sub)category is set in url */}
+                <Route path=':subCategory/:brick' element={<ProductPage />} />
               </Route>
               <Route path='plates' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
+                <Route path=':subCategory' element={<ProductsPage />} />
+                <Route path=':subCategory/:brick' element={<ProductPage />} />
               </Route>
               <Route path='minifigs' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
+                <Route path=':subCategory' element={<ProductsPage />} />
+                <Route path=':subCategory/:brick' element={<ProductPage />} />
               </Route>
               <Route path='other-products' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
+                <Route path=':subCategory' element={<ProductsPage />} />
+                <Route path=':subCategory/:brick' element={<ProductPage />} />
               </Route>
             </Route>
           </Routes>

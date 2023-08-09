@@ -18,12 +18,32 @@ export const Overview = ({ type='brick', categories, items }: OverviewProps) => 
                             key={category.id}
                         >
                             <StCardLink
-                                to={`${category.name.toLowerCase()}`}
+                                to={`${category.name.toLowerCase().split(' ').join('_')}`}
                             >
                                 <Card
                                     type={type}
                                     item={category}
                                     extraItem={items.filter((brick: Brick) => brick.category.id == category.id)[0]}
+                                />
+                            </StCardLink>
+                        </li>
+                    ))}
+                </StOverview>
+            )
+        case 'brick':
+            return (
+                <StOverview>
+                    {items && items.map((brick: Brick) => (
+                        <li
+                            key={brick.id}
+                        >
+                            <StCardLink
+                                to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
+                            >
+                                <Card
+                                    type={'category'} // TODO: use Card of type 'brick'
+                                    item={brick}
+                                    extraItem={brick}
                                 />
                             </StCardLink>
                         </li>

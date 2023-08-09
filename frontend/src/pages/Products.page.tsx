@@ -1,10 +1,11 @@
-import { useCustomHook } from '../hooks'
-import { GET_CATEGORIES } from '../gql/queries'
+import { useContext } from 'react'
+import { BrickContext, CategoryContext } from '../ContextProvider.tsx'
+import { Category } from '../types.ts'
 
 export const ProductsPage = () => {
-    const allcategories = useCustomHook(GET_CATEGORIES).getCategories
+    const allCategories = useContext(CategoryContext)
     const slug = window.location.pathname.split('/')[1]
-    const mainCategory = allcategories && allcategories.find((category: any) => {
+    const mainCategory = allCategories && allCategories.find((category: Category) => {
         switch (slug) {
             case 'other-products':
                 return category.name === 'Other'
@@ -12,18 +13,13 @@ export const ProductsPage = () => {
                 return category.name === slug.charAt(0).toUpperCase() + slug.slice(1)
         }
     }) 
-    const categories = allcategories && allcategories.filter((category: any) => category.mainCategory && category.mainCategory.id === mainCategory.id).sort((a: any, b: any) => a.name.localeCompare(b.name))
+    const subCategories = allCategories && allCategories.filter((category: Category) => category.mainCategory && category.mainCategory.id === mainCategory!.id).sort((a: Category, b: Category) => a.name.localeCompare(b.name))
 
-    console.log(categories)
+    const bricks = useContext(BrickContext)
 
     return (
         <>
             <p>Products</p>
-            <ul>
-                {categories && categories.map((category: any) => (
-                    <li key={category.id}>{category.name}</li>
-                ))}
-            </ul>
         </>
     )
 }

@@ -1,2 +1,2 @@
 export * from './getCategories'
-export * from './getBricksByCategory'
+export * from './getBricks'

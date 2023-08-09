@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const GET_BRICKS_BY_CATEGORY = gql`
-  query getBricksByCategory($id: ID!) {
+export const GET_BRICKS = gql`
+  query getBricks {
     getBricks {
       id
       name

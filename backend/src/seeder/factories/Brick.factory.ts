@@ -59,10 +59,10 @@ class CategoryFactory extends Factory {
                   quantity: Math.round(Math.random() * 5000),
                   price: 0.1,
                   images: [
-                    `${mainCategory.toLocaleLowerCase()}_${brick.name
+                    `${mainCategory.toLocaleLowerCase()}_${category.name.toLocaleLowerCase()}_${brick.name
                       .toLowerCase()
                       .split(' ')
-                      .join('_')}_${color}.jpg`,
+                      .join('_')}_${color.toLocaleLowerCase()}.jpg`,
                   ],
                   category: category,
                   variations: variations,

@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { BrickContext, CategoryContext } from '../ContextProvider.tsx'
 import { Category } from '../types.ts'
+import { Overview } from '../components/Overview/Overview.tsx'
 
 export const ProductsPage = () => {
     const allCategories = useContext(CategoryContext)
@@ -19,7 +20,14 @@ export const ProductsPage = () => {
 
     return (
         <>
-            <p>Products</p>
+            <h2>{mainCategory &&  mainCategory.name}</h2>
+            {subCategories && bricks &&
+                <Overview 
+                    type='category'
+                    categories={subCategories}
+                    items={bricks!}
+                />
+            }
         </>
     )
 }

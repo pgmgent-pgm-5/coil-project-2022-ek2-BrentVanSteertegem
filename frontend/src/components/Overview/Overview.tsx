@@ -41,7 +41,6 @@ export const Overview = ({ type='brick', categories, items }: OverviewProps) => 
                                 to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
                             >
                                 <Card
-                                    type={'category'} // TODO: use Card of type 'brick'
                                     item={brick}
                                     extraItem={brick}
                                 />

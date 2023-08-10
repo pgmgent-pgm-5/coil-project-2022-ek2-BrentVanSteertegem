@@ -1,3 +1,4 @@
+import { Button } from '../Button'
 import { Brick, Category } from '../../types'
 import { StCard, StImage } from './Card.styled'
 
@@ -23,8 +24,23 @@ export const Card = ({ type='brick', item, extraItem }: CardProps) => {
             )
         case 'brick':
             return item && (
-                // TODO: create Card of type 'brick'
-                null
+                <StCard>
+                    <StImage 
+                        src={`/assets/images/${slug}/${extraItem && extraItem.images[0]}`}
+                        alt={extraItem && extraItem.name || item.name}
+                    />
+                    <section>
+                        <p>{item!.name}</p>
+                        <p>&euro;{item!.price}</p>
+                    </section>
+                    <span>
+                        <Button
+                            faIconLeft='shopping-cart'
+                            >
+                            Add to cart
+                        </Button>
+                    </span>
+                </StCard>
             )
     }
 }

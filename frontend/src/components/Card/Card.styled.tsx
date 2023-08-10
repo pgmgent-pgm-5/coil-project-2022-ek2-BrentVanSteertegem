@@ -11,6 +11,11 @@ export const StCard = styled.div`
     border-radius: ${Variables.rounded.medium}rem;
     padding: ${Variables.spacing.medium}rem;
     margin: ${Variables.spacing.xsmall}rem;
+
+    section {
+        width: inherit;
+        justify-content: space-between;
+    }
 `
 
 export const StImage = styled.img`

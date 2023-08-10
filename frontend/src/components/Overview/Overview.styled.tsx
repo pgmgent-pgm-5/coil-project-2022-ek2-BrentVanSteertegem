@@ -8,7 +8,7 @@ export const StOverview = styled.ul`
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    padding: ${Variables.spacing.xsmall}rem;
+    padding: 0 ${Variables.spacing.xsmall}rem ${Variables.spacing.medium}rem ${Variables.spacing.xsmall}rem;
 `
 
 export const StCardLink = styled(StLink)`

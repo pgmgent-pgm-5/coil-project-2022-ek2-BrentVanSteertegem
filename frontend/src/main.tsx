@@ -40,23 +40,19 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               </Route>
               <Route path='bricks' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
-                <Route path=':subCategory' element={<ProductsPage />} /> {/* TODO: Add 404 when invalid (sub)category is set in url */}
-                <Route path=':subCategory/:brick' element={<ProductPage />} />
+                <Route path=':item' element={<ProductPage />} /> {/* TODO: Add 404 when invalid (sub)category is set in url */}
               </Route>
               <Route path='plates' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
-                <Route path=':subCategory' element={<ProductsPage />} />
-                <Route path=':subCategory/:brick' element={<ProductPage />} />
+                <Route path=':item' element={<ProductPage />} />
               </Route>
               <Route path='minifigs' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
-                <Route path=':subCategory' element={<ProductsPage />} />
-                <Route path=':subCategory/:brick' element={<ProductPage />} />
+                <Route path=':item' element={<ProductPage />} />
               </Route>
               <Route path='other-products' element={<DefaultLayout />}>
                 <Route index element={<ProductsPage />} />
-                <Route path=':subCategory' element={<ProductsPage />} />
-                <Route path=':subCategory/:brick' element={<ProductPage />} />
+                <Route path=':item' element={<ProductPage />} />
               </Route>
             </Route>
           </Routes>

@@ -49,7 +49,6 @@ class CategoryFactory extends Factory {
             bricks.forEach(async (brick) => {
               const variations: Brick[] = []
               for (const color of this.colors) {
-                console.log(variations)
                 const record = await this.insert({
                   name: `${color} ${category.name} ${brick.name}`,
                   description: `A ${color.toLocaleLowerCase()} ${category.name.toLocaleLowerCase()} ${

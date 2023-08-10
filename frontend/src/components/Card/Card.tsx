@@ -1,46 +1,30 @@
 import { Button } from '../Button'
-import { Brick, Category } from '../../types'
+import { Brick } from '../../types'
 import { StCard, StImage } from './Card.styled'
 
 type CardProps = {
-    type?: 'category' | 'brick'
-    item: Category | Brick
-    extraItem?: Brick
+    item: Brick
 }
 
-export const Card = ({ type='brick', item, extraItem }: CardProps) => {
+export const Card = ({ item }: CardProps) => {
     const slug = window.location.pathname.split('/')[1]
-
-    switch (type) {
-        case 'category':
-            return item && (
-                <StCard>
-                    <StImage 
-                        src={`/assets/images/${slug}/${extraItem && extraItem.images[0]}`}
-                        alt={extraItem && extraItem.name || item.name}
-                    />
-                    <p>{item!.name}</p>
-                </StCard>
-            )
-        case 'brick':
-            return item && (
-                <StCard>
-                    <StImage 
-                        src={`/assets/images/${slug}/${extraItem && extraItem.images[0]}`}
-                        alt={extraItem && extraItem.name || item.name}
-                    />
-                    <section>
-                        <p>{item!.name}</p>
-                        <p>&euro;{item!.price}</p>
-                    </section>
-                    <span>
-                        <Button
-                            faIconLeft='shopping-cart'
-                            >
-                            Add to cart
-                        </Button>
-                    </span>
-                </StCard>
-            )
-    }
+    return item && (
+        <StCard>
+            <StImage 
+                src={`/assets/images/${slug}/${item.images[0]}`}
+                alt={item.name}
+            />
+            <section>
+                <p>{item!.name}</p>
+                <p>&euro;{item!.price}</p>
+            </section>
+            <span>
+                <Button
+                    faIconLeft='shopping-cart'
+                >
+                    Add to cart
+                </Button>
+            </span>
+        </StCard>
+    )
 }

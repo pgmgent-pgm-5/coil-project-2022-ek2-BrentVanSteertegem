@@ -25,34 +25,27 @@ export const Breadcrumb = () => {
     urlPieces.forEach((urlPiece: string, index: number) => {
         switch (index) {
             case 0:
-            case 1:
-                const category = categories && index > 1 ?
-                    categories.find((category: Category) => 
-                        category.mainCategory && category.mainCategory.name == breadcrumbs[1].name && 
-                        category.name.toLowerCase().split(' ').join('_') == urlPiece
-                    )
-                : 
-                    categories && categories.find((category: Category) => {
-                        switch (urlPiece) { 
-                            case 'other-products':
-                                return category.name === 'Other'
-                            default:
-                                return category.name === urlPiece.charAt(0).toUpperCase() + urlPiece.slice(1)
-                        }
-                    }) 
+                const category = categories && categories.find((category: Category) => {
+                    switch (urlPiece) { 
+                        case 'other-products':
+                            return category.name == 'Other'
+                        default:
+                            return category.name == urlPiece.charAt(0).toUpperCase() + urlPiece.slice(1)
+                    }
+                }) 
                         
                 breadcrumbs.push({
                     name: category && category.name || 'category',
                     url: `/${urlPieces.slice(0, index + 1).join('/')}`
                 })
                 break
-            case 2:
+            case 1:
                 const brick = bricks && bricks.find((brick: any) => 
-                    brick.name.toLowerCase().split(' ').join('_') == urlPiece && 
-                    brick.category.name == breadcrumbs[2].name
+                    brick.name.toLowerCase().split(' ').join('_') == urlPiece &&
+                    brick.category.name == breadcrumbs[1].name
                 )
                 breadcrumbs.push({
-                    name: brick && brick.name || 'brick',
+                    name: brick && brick.name || 'item',
                     url: `/${urlPieces.slice(0, index + 1).join('/')}`
                 })
                 break

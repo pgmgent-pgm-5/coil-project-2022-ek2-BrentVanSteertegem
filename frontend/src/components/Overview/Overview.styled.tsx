@@ -13,6 +13,10 @@ export const StOverview = styled.section`
     }
 `
 
+export const StProductsOverview = styled.div`
+    width: 100%;
+`
+
 export const StPageItems = styled.section`
     justify-content: center;
     
@@ -28,7 +32,7 @@ export const StPaginationContainer = styled.section`
     padding-bottom: ${Variables.spacing.medium}rem;
 `
 
-export const StProductsOverview = styled.ul`
+export const StProductsList = styled.ul`
     width: calc(100% - ${Variables.spacing.xsmall * 2}rem);
     min-width: 19rem;
     margin: 0;

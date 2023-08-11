@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { Brick, Category, Color } from '../../types'
 import { Card } from '../Card'
-import { StCardLink, StOverview, StPageItems, StPaginationContainer, StProductsOverview } from './Overview.styled'
+import { StCardLink, StOverview, StPageItems, StPaginationContainer, StProductsList, StProductsOverview } from './Overview.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Filter } from '../Filter'
 import { Pagination } from '../Pagination'
@@ -64,11 +64,11 @@ export const Overview = () => {
                 activeFilters={activeFilters}
                 setActiveFilters={setActiveFilters}
             />
-            <div>
+            <StProductsOverview>
                 <StPageItems>
                     <p>Showing {(currentPage - 1) * itemsPerPage + 1}{pageBricks && pageBricks.length > 1 && ` - ${(currentPage - 1) * itemsPerPage +  pageBricks.length}`} of {bricks && bricks.length}</p>
                 </StPageItems>
-                <StProductsOverview>
+                <StProductsList>
                     {pageBricks && pageBricks.map((brick: Brick) => (
                         <li
                             key={brick.id}
@@ -82,7 +82,7 @@ export const Overview = () => {
                             </StCardLink>
                         </li>
                     ))}
-                </StProductsOverview>
+                </StProductsList>
                 <StPaginationContainer>
                     {
                         bricks && bricks.length > itemsPerPage &&
@@ -93,7 +93,7 @@ export const Overview = () => {
                             />
                     }
                 </StPaginationContainer>
-            </div>
+            </StProductsOverview>
         </StOverview>
     )
 }

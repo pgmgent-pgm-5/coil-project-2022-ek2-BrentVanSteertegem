@@ -1,3 +1,13 @@
+export enum Color {
+  'Red',
+  'Green',
+  'Blue',
+  'Yellow',
+  'Black',
+  'White',
+  'Grey',
+}
+
 export type Category = {
   id: number
   name: string

@@ -1,8 +1,9 @@
-import { useContext } from 'react'
-import { Brick, Category } from '../../types'
+import { useContext, useEffect, useState } from 'react'
+import { Brick, Category, Color } from '../../types'
 import { Card } from '../Card'
-import { StCardLink, StOverview } from './Overview.styled'
+import { StCardLink, StOverview, StProductsOverview } from './Overview.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
+import { Filter } from '../Filter'
 
 export const Overview = () => {
     const allCategories = useContext(CategoryContext)
@@ -20,27 +21,54 @@ export const Overview = () => {
 
     const subCategories = allCategories && mainCategory && allCategories.filter((category: Category) => category.mainCategory && category.mainCategory.name == mainCategory.name)
 
+    const filters = new Map<string, string[]>()
+    filters.set('Category', subCategories && subCategories.map((category: Category) => category.name) || [])
+    filters.set('Color', Object.values(Color).filter((v) => isNaN(Number(v))) as string[])
+    
+    const [activeFilters, setActiveFilters] = useState<Map<string, string[]>>(new Map<string, string[]>([[ 'Category', [] ], ['Color', [] ]]))
+    
     const bricks = allBricks && subCategories && allBricks.filter((brick: Brick) => 
-        subCategories && subCategories.find((category: Category) => 
-            category.id == brick.category.id
+        activeFilters && activeFilters.get('Category')!.length > 0 ? 
+            activeFilters.get('Category')!.find((category: string) => 
+                category == brick.category.name
+            ):
+            subCategories.find((category: Category) => 
+                category.id == brick.category.id
+            )
+        ).filter((brick: Brick) =>
+            activeFilters && activeFilters.get('Color')!.length > 0 ?
+                activeFilters.get('Color')!.find((color: string) =>
+                    color == brick.color
+                ):
+                brick
         )
-    )
+
+    useEffect(() => {
+        console.log(activeFilters)
+    }, [activeFilters])
 
     return (
         <StOverview>
-            {bricks && bricks.map((brick: Brick) => (
-                <li
-                    key={brick.id}
-                >
-                    <StCardLink
-                        to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
+            <Filter 
+                filters={filters}
+                activeFilters={activeFilters}
+                setActiveFilters={setActiveFilters}
+            />
+            <StProductsOverview>
+                {bricks && bricks.map((brick: Brick) => (
+                    <li
+                        key={brick.id}
                     >
-                        <Card
-                            item={brick}
-                        />
-                    </StCardLink>
-                </li>
-            ))}
+                        <StCardLink
+                            to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
+                        >
+                            <Card
+                                item={brick}
+                            />
+                        </StCardLink>
+                    </li>
+                ))}
+            </StProductsOverview>
         </StOverview>
     )
 }

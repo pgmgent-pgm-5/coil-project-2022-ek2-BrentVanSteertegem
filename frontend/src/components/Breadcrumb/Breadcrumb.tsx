@@ -56,7 +56,9 @@ export const Breadcrumb = () => {
         <section>
             {breadcrumbs.map((breadcrumb: Breadcrumb, index: number) => {
                 return (
-                    <>
+                    <div
+                        key={index}
+                    >
                         <StBreadcrumbLink
                             key={index}
                             to={breadcrumb.url}
@@ -66,7 +68,7 @@ export const Breadcrumb = () => {
                         {index < breadcrumbs.length - 1 &&
                             <span>&gt;</span>
                         }
-                    </>
+                    </div>
                 )
             })}
         </section>

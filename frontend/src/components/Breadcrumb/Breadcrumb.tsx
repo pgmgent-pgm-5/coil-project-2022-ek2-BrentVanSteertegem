@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { StBreadcrumbLink } from './Breadcrumb.styled'
+import { StBreadcrumb, StBreadcrumbLink } from './Breadcrumb.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Category } from '../../types'
 
@@ -53,7 +53,7 @@ export const Breadcrumb = () => {
     })
     
     return (
-        <section>
+        <StBreadcrumb>
             {breadcrumbs.map((breadcrumb: Breadcrumb, index: number) => {
                 return (
                     <div
@@ -71,6 +71,6 @@ export const Breadcrumb = () => {
                     </div>
                 )
             })}
-        </section>
+        </StBreadcrumb>
     )
 }

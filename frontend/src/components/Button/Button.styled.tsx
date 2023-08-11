@@ -20,6 +20,11 @@ export const StButtonSecondary = styled(StButton)`
     color: ${Variables.colors.text};
 `
 
+export const StButtonText = styled(StButton)`
+    background-color: transparent;
+    color: inherit;
+`
+
 export const StMenuButton = styled.button`
     width: 2.5rem;
     height: 1.75rem;

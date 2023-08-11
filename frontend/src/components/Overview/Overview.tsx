@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { Brick, Category, Color } from '../../types'
 import { Card } from '../Card'
-import { StCardLink, StOverview, StProductsOverview } from './Overview.styled'
+import { StCardLink, StOverview, StPageItems, StPaginationContainer, StProductsOverview } from './Overview.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Filter } from '../Filter'
+import { Pagination } from '../Pagination'
 
 export const Overview = () => {
     const allCategories = useContext(CategoryContext)
@@ -43,9 +44,18 @@ export const Overview = () => {
                 brick
         )
 
+    const itemsPerPage = 12
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const pageBricks = bricks && bricks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+        
     useEffect(() => {
-        console.log(activeFilters)
+        setCurrentPage(1)
+        window.scrollTo(0, 0)
     }, [activeFilters])
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [currentPage])
 
     return (
         <StOverview>
@@ -54,21 +64,36 @@ export const Overview = () => {
                 activeFilters={activeFilters}
                 setActiveFilters={setActiveFilters}
             />
-            <StProductsOverview>
-                {bricks && bricks.map((brick: Brick) => (
-                    <li
-                        key={brick.id}
-                    >
-                        <StCardLink
-                            to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
+            <div>
+                <StPageItems>
+                    <p>Showing {(currentPage - 1) * itemsPerPage + 1}{pageBricks && pageBricks.length > 1 && ` - ${(currentPage - 1) * itemsPerPage +  pageBricks.length}`} of {bricks && bricks.length}</p>
+                </StPageItems>
+                <StProductsOverview>
+                    {pageBricks && pageBricks.map((brick: Brick) => (
+                        <li
+                            key={brick.id}
                         >
-                            <Card
-                                item={brick}
+                            <StCardLink
+                                to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
+                                >
+                                <Card
+                                    item={brick}
+                                />
+                            </StCardLink>
+                        </li>
+                    ))}
+                </StProductsOverview>
+                <StPaginationContainer>
+                    {
+                        bricks && bricks.length > itemsPerPage &&
+                            <Pagination
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                amountOfPages={Math.ceil(bricks.length / itemsPerPage)}
                             />
-                        </StCardLink>
-                    </li>
-                ))}
-            </StProductsOverview>
+                    }
+                </StPaginationContainer>
+            </div>
         </StOverview>
     )
 }

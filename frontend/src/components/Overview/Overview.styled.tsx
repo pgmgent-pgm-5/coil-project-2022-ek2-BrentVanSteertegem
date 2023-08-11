@@ -11,23 +11,39 @@ export const StOverview = styled.section`
     @media (min-width: 33.5rem) {
         flex-wrap: nowrap;
     }
-    `
+`
+
+export const StPageItems = styled.section`
+    justify-content: center;
+    
+    p {
+        margin: 0 ${Variables.spacing.xsmall}rem;
+        color: ${Variables.colors.grey};
+        font-size: ${Variables.textSizes.small}rem;
+    }
+`
+
+export const StPaginationContainer = styled.section`
+    justify-content: center;
+    padding-bottom: ${Variables.spacing.medium}rem;
+`
 
 export const StProductsOverview = styled.ul`
-    width: 100%;
+    width: calc(100% - ${Variables.spacing.xsmall * 2}rem);
     min-width: 19rem;
     margin: 0;
     list-style-type: none;
     display: flex;
+    justify-content: space-evenly;
     gap: ${Variables.spacing.xsmall}rem;
     flex-wrap: wrap;
-    padding: 0 ${Variables.spacing.xsmall}rem ${Variables.spacing.medium}rem ${Variables.spacing.xsmall}rem;
+    padding: 0 ${Variables.spacing.xsmall}rem;
 `
 
 export const StCardLink = styled(StLink)`
     text-decoration: none;
     color: inherit;
-
+    
     &:hover {
         p {
             color: ${Variables.colors.primary};

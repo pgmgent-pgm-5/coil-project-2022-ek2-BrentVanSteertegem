@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { StBreadcrumb, StBreadcrumbLink } from './Breadcrumb.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
-import { Category } from '../../types'
+import { Brick, Category } from '../../types'
 
 export const Breadcrumb = () => {
       type Breadcrumb = {
@@ -40,9 +40,8 @@ export const Breadcrumb = () => {
                 })
                 break
             case 1:
-                const brick = bricks && bricks.find((brick: any) => 
-                    brick.name.toLowerCase().split(' ').join('_') == urlPiece &&
-                    brick.category.name == breadcrumbs[1].name
+                const brick = bricks && bricks.find((brick: Brick) => 
+                    brick.name.toLocaleLowerCase().split(' ').join('_') == urlPiece
                 )
                 breadcrumbs.push({
                     name: brick && brick.name || 'item',

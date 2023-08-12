@@ -8,7 +8,7 @@ type ButtonProps = {
     faIconLeft?: IconName
     faIconRight?: IconName
     type?: 'primary' | 'secondary' | 'text'
-    onClick?: () => void
+    onClick?: ((event: {    preventDefault: () => void}) => void) | (() => void)
 }
 
 export const Button = ({ children, faIconLeft, faIconRight, type, onClick }: ButtonProps) => {

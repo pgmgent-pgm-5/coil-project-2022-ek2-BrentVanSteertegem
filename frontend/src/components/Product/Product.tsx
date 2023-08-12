@@ -3,7 +3,7 @@ import { Button } from '../Button'
 import { Card } from '../Card'
 import { Brick, Category } from '../../types'
 import { StExtraInfo, StExtraInfoButton, StExtraInfoContainer, StMainInfo, StProduct, StProductImage, StSection, StRelatedProducts, StRelatedProductsSection, StVariations, StCardLink, StVariationCard, StVariationImage, StQuantitySelector } from './Product.styled'
-import { BrickContext, CategoryContext } from '../../ContextProvider'
+import { BrickContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
 
 type ProductProps = {
     brick: Brick
@@ -14,9 +14,9 @@ export type StExtraInfoButtonProps = {
 }
 
 export const Product = ({ brick }: ProductProps) => { 
-    const addToCart = (brick: Brick) => {
-        console.log('add to cart')
-    }
+    const [amount, setAmount] = useState(1)
+
+    const updateCart = useContext(UpdateCartContext)
 
     const [extraInfo, setExtraInfo] = useState<'description' | 'reviews'>('description')
 
@@ -68,7 +68,10 @@ export const Product = ({ brick }: ProductProps) => {
                 <p>&euro;{brick && brick.price}</p>
                 <StQuantitySelector>
                     <p>Quantity :</p>
-                    <select>
+                    <select
+                        onChange={(e) => setAmount(parseInt(e.target.value))}
+                        value={amount}
+                    >
                         {
                             [...Array(10)].map((_, i) => (
                                 brick && brick.quantity > i &&
@@ -111,7 +114,7 @@ export const Product = ({ brick }: ProductProps) => {
                 </StSection>
                 <Button
                     onClick={() => {
-                        addToCart(brick)
+                        updateCart && updateCart(brick, amount)
                     }}
                     faIconLeft='shopping-cart'
                 >

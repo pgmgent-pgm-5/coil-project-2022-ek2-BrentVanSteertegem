@@ -25,3 +25,8 @@ export type Brick = {
   images: string[]
   variations: Brick[]
 }
+
+export type CartItem = {
+  item: Brick
+  amount: number
+}

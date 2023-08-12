@@ -6,6 +6,7 @@ import { Searchbar } from '../Searchbar'
 import { Icon } from '../Icon'
 import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StHeaderLink, StLogo, StLogoLink, StMenu, StSection } from './Header.styled'
 import { Variables } from '../../style'
+import { Link } from '../Link'
 
 export type StMenuProps = {
     isMenuOpen: boolean
@@ -34,13 +35,15 @@ export const Header = () => {
                                         name='magnifying-glass'
                                     />
                                 </StHeaderButton>
-                                <StHeaderButton
-                                    onClick={() => console.log('Cart')}
+                                <Link
+                                    to='/cart'
                                 >
-                                    <Icon 
-                                        name='shopping-cart'
-                                    />
-                                </StHeaderButton>
+                                    <StHeaderButton>
+                                        <Icon 
+                                            name='shopping-cart'
+                                            />
+                                    </StHeaderButton>
+                                </Link>
                                 <MenuButton 
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                                     isMenuOpen={isMenuOpen}

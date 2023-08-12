@@ -1,3 +1,4 @@
+export * from './Cart.page'
 export * from './FAQ.page'
 export * from './Home.page'
 export * from './PageNotFound.page'

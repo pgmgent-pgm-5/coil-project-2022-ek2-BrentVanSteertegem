@@ -4,7 +4,7 @@ import { Button, MenuButton } from '../Button'
 import { Container } from '../Container'
 import { Searchbar } from '../Searchbar'
 import { Icon } from '../Icon'
-import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StLogo, StLogoLink, StMenu, StSection } from './Header.styled'
+import { StCategory, StHeader, StHeaderButton, StHeaderButtons, StHeaderLink, StLogo, StLogoLink, StMenu, StSection } from './Header.styled'
 import { Variables } from '../../style'
 
 export type StMenuProps = {
@@ -84,13 +84,17 @@ export const Header = () => {
                                 <Searchbar
                                     onSearch={(e) => console.log(e)}
                                 />
-                                <Button
-                                    faIconLeft='shopping-cart'
-                                    type='secondary'
-                                    onClick={() => console.log('Cart')}
+                                <StHeaderLink
+                                    to='/cart'
                                 >
-                                    Cart
-                                </Button>
+                                    <Button
+                                        faIconLeft='shopping-cart'
+                                        type='secondary'
+                                        onClick={() => {}}
+                                    >
+                                        Cart
+                                    </Button>
+                                </StHeaderLink>
                             </>
                         }
                     </StSection>

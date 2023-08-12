@@ -15,6 +15,10 @@ export const StSection = styled.section`
     gap: 2rem;
 `
 
+export const StHeaderLink = styled(StLink)`
+    text-decoration: none;
+`
+
 export const StLogoLink = styled(StLink)`
     text-decoration: none;
 `

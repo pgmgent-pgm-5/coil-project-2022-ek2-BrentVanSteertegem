@@ -6,6 +6,7 @@ export const StFilter = styled.div`
     width: 100%;
     max-width: ${Variables.breakpoints.mobile}rem;
     padding: 0 ${Variables.spacing.medium}rem;
+    margin-bottom: ${Variables.spacing.large}rem;
     background-color: ${Variables.colors.lightGrey};
 
     @media (min-width: 33.5rem) {

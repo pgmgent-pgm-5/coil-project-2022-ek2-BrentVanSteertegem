@@ -13,16 +13,30 @@ export const StButton = styled.button`
     line-height: ${Variables.textSizes.small}rem;
     background-color: ${Variables.colors.primary};
     color: ${Variables.colors.white};
+    transition: 0.3s ease-in;
+
+    &:hover {
+        background-color: ${Variables.colors.primaryDark};
+    }
 `
 
 export const StButtonSecondary = styled(StButton)`
     background-color: ${Variables.colors.secondary};
     color: ${Variables.colors.text};
+
+    &:hover {
+        background-color: ${Variables.colors.secondary};
+        color: ${Variables.colors.primaryDark};
+    }
 `
 
 export const StButtonText = styled(StButton)`
     background-color: transparent;
     color: inherit;
+
+    &:hover {
+        background-color: transparent;
+    }
 `
 
 export const StMenuButton = styled.button`

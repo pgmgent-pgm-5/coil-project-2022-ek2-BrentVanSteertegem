@@ -2,15 +2,19 @@ import { styled } from 'styled-components'
 import { Variables } from '../../style'
 import { StButtonText } from '../Button/Button.styled'
 import { StExtraInfoButtonProps } from './Product'
+import { StLink } from '../Link/Link.styled'
 
 export const StProduct = styled.section`
     flex-wrap: wrap;
 `
 
 export const StProductImage = styled.img`
-    width: calc(50% - ${Variables.spacing.xsmall * 2 + 0.5}rem);
+    width: calc(50% - ${(Variables.spacing.xsmall + Variables.spacing.medium) * 2 + 0.5}rem);
+    aspect-ratio: 1;
+    object-fit: contain;
     box-shadow: 0 0 ${Variables.spacing.xsmall}rem #0002;
     border-radius: ${Variables.rounded.medium}rem;
+    padding: ${Variables.spacing.medium}rem;
     margin: ${Variables.spacing.xsmall}rem;
 `
 
@@ -18,13 +22,61 @@ export const StMainInfo = styled.div`
     width: calc(50% - 0.5rem);
 `
 
-export const StQuantitySelector = styled.section`
-    align-items: center;
+export const StSection = styled.section`
+    align-items: baseline;
     margin: ${Variables.spacing.medium}rem 0;
-    margin-bottom: ${Variables.spacing.large}rem;
-
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    
+    & + & {
+        margin-bottom: ${Variables.spacing.large}rem;
+    }
+    
     p {
         margin: 0;
+    }
+    
+`
+
+export const StQuantitySelector = styled(StSection)`
+    align-items: center;
+`
+
+export const StVariations = styled.ul`
+    max-width: calc(100% - 4.2rem);
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: ${Variables.spacing.small}rem;
+`
+
+export const StVariationCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${Variables.spacing.xsmall}rem;
+    align-items: center;
+    box-shadow: 0 0 ${Variables.spacing.xsmall}rem #0002;
+    border-radius: ${Variables.rounded.medium}rem;
+    margin: ${Variables.spacing.xsmall}rem;
+    padding: ${Variables.spacing.medium}rem;
+`
+
+export const StVariationImage = styled.img`
+    width: 6rem;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    margin: 0 0 ${Variables.spacing.xsmall}rem 0;
+    overflow: visible;
+`
+
+export const StCardLink = styled(StLink)`
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease-in;
+
+    &:hover {
+        color: ${Variables.colors.primaryDark};
     }
 `
 

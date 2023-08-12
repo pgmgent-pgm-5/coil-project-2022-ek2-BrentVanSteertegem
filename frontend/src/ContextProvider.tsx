@@ -11,7 +11,7 @@ export const CategoryContext = createContext<Category[] | undefined>(undefined)
 export const BrickContext = createContext<Brick[] | undefined>(undefined)
 
 export const CartContext = createContext<CartItem[]>([])
-export const UpdateCartContext = createContext<((brick: Brick, amount: number) => void) | undefined>(undefined)
+export const UpdateCartContext = createContext<((cart: CartItem[]) => void) | undefined>(undefined)
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
     const bricks = useCustomHook(GET_BRICKS).getBricks
@@ -19,13 +19,9 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || '[]'))
 
-    const updateCart = (brick: Brick, amount: number) => {
-        const localCart = cart.find((cartItem: CartItem) => cartItem.item.id == brick.id) ? 
-            cart.map((cartItem: CartItem) => cartItem.item.id == brick.id ? { item: cartItem.item, amount: cartItem.amount + amount } : cartItem)
-        :
-            [...cart, { item: brick, amount }]
-        setCart(localCart)
-        localStorage.setItem('cart', JSON.stringify(localCart))
+    const updateCart = (cart: CartItem[]) => {
+        setCart(cart)
+        localStorage.setItem('cart', JSON.stringify(cart))
     }
 
     return (

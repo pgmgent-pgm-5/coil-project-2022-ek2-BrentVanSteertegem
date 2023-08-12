@@ -1,8 +1,8 @@
 import { Button } from '../Button'
-import { Brick } from '../../types'
+import { Brick, CartItem } from '../../types'
 import { StCard, StImage } from './Card.styled'
 import { useContext } from 'react'
-import { UpdateCartContext } from '../../ContextProvider'
+import { CartContext, UpdateCartContext } from '../../ContextProvider'
 
 type CardProps = {
     item: Brick
@@ -11,7 +11,17 @@ type CardProps = {
 export const Card = ({ item }: CardProps) => {
     const slug = window.location.pathname.split('/')[1]
 
+    const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
+
+    const addToCart = (event: { preventDefault: () => void }) => {
+        event.preventDefault()
+        const localCart = cart.find((cartItem: CartItem) => cartItem.item.id == item.id) ? 
+            cart.map((cartItem: CartItem) => cartItem.item.id == item.id ? { item: cartItem.item, amount: cartItem.amount + 1 } : cartItem)
+        :
+            [...cart, { item: item, amount: 1 }]
+        updateCart && updateCart(localCart)
+    }
 
     return item && (
         <StCard>
@@ -26,8 +36,7 @@ export const Card = ({ item }: CardProps) => {
             <span>
                 <Button
                     onClick={(event: { preventDefault: () => void }) => {
-                        event.preventDefault()
-                        updateCart && updateCart(item, 1)
+                        addToCart(event)
                     }}
                     faIconLeft='shopping-cart'
                 >

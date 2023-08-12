@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { Button } from '../Button'
 import { Card } from '../Card'
-import { Brick, Category } from '../../types'
+import { Brick, CartItem, Category } from '../../types'
 import { StExtraInfo, StExtraInfoButton, StExtraInfoContainer, StMainInfo, StProduct, StProductImage, StSection, StRelatedProducts, StRelatedProductsSection, StVariations, StCardLink, StVariationCard, StVariationImage, StQuantitySelector } from './Product.styled'
-import { BrickContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
+import { BrickContext, CartContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
 
 type ProductProps = {
     brick: Brick
@@ -16,7 +16,16 @@ export type StExtraInfoButtonProps = {
 export const Product = ({ brick }: ProductProps) => { 
     const [amount, setAmount] = useState(1)
 
+    const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
+
+    const addToCart = () => {
+        const localCart = cart.find((cartItem: CartItem) => cartItem.item.id == brick.id) ? 
+            cart.map((cartItem: CartItem) => cartItem.item.id == brick.id ? { item: cartItem.item, amount: cartItem.amount + amount } : cartItem)
+        :
+            [...cart, { item: brick, amount }]
+        updateCart && updateCart(localCart)
+    }
 
     const [extraInfo, setExtraInfo] = useState<'description' | 'reviews'>('description')
 
@@ -114,7 +123,7 @@ export const Product = ({ brick }: ProductProps) => {
                 </StSection>
                 <Button
                     onClick={() => {
-                        updateCart && updateCart(brick, amount)
+                        addToCart()
                     }}
                     faIconLeft='shopping-cart'
                 >

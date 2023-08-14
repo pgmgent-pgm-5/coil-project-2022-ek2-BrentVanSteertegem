@@ -1,10 +1,7 @@
-import { useContext } from 'react'
-import { CartContext } from '../ContextProvider'
+import { Cart } from '../components'
 
 export const CartPage = () => {
-    const cart = useContext(CartContext)
-
     return (
-        <p>Shopping Cart</p>
+        <Cart />
     )
 }

@@ -1,6 +1,7 @@
 export * from './Breadcrumb'
 export * from './Button'
 export * from './Card'
+export * from './Cart'
 export * from './Container'
 export * from './Filter'
 export * from './Footer'

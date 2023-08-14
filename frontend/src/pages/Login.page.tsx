@@ -4,7 +4,7 @@ export const LoginPage = () => {
     return (
         <CenteredContainer>
             <Form 
-                inputFields={[
+                inputfields={[
                     {
                         name: 'email',
                         type: 'text',

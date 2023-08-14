@@ -54,6 +54,7 @@ export const Variables = {
     placeHolder: Colors.grey,
     logoText: Colors.white,
     buttonText: Colors.white,
+    errorText: Colors.red,
   },
   fonts: { ...Fonts },
   breakpoints: { ...Breakpoints },

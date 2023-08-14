@@ -19,7 +19,7 @@ class CategoryFactory extends Factory {
   constructor() {
     super()
     this.bricks = new Map()
-    this.bricks.set('Bricks', [])
+    this.bricks.set('Bricks', [{ name: 'basic brick' }])
     this.bricks.set('Plates', [{ name: 'basic plate' }])
     this.bricks.set('Minifigs', [])
     this.bricks.set('Other', [])

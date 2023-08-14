@@ -2,12 +2,14 @@ import { defineConfig } from 'vite'
 import dns from 'dns'
 import react from '@vitejs/plugin-react'
 import Unfonts from 'unplugin-fonts/vite'
+import pluginRewriteAll from 'vite-plugin-rewrite-all'
 
 dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
   plugins: [
     react(),
+    pluginRewriteAll(),
     Unfonts({
       custom: {
         families: [

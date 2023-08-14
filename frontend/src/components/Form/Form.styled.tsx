@@ -54,8 +54,8 @@ export const StFormPart = styled.div`
     overflow-y: hidden;
     padding: ${Variables.spacing.small}rem;
     background-color: ${Variables.colors.lightGrey};
+    border-radius: ${Variables.rounded.small}rem;
     transition: 0.3s ease-in;
-
     
     &.closed {
         max-height: 3.25rem;

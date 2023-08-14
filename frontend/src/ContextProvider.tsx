@@ -20,8 +20,9 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || '[]'))
 
     const updateCart = (cart: CartItem[]) => {
-        setCart(cart)
-        localStorage.setItem('cart', JSON.stringify(cart))
+        const newCart = cart.filter(cartItem => cartItem.amount > 0)
+        setCart(newCart)
+        localStorage.setItem('cart', JSON.stringify(newCart))
     }
 
     return (

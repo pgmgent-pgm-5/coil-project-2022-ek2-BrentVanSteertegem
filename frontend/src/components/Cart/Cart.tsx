@@ -1,17 +1,23 @@
 import { useContext } from 'react'
-import { CartContext, UpdateCartContext } from '../../ContextProvider'
-import { CartItem } from '../../types'
-import { Button } from '../Button'
+import { CartContext, UpdateCartContext, CategoryContext } from '../../ContextProvider'
+import { Brick, CartItem } from '../../types'
 import { Form } from '../Form'
-import { StCartItems } from './Cart.styled'
+import { StCartItem, StCartItemAmountChange, StCartItemAmountChangeButton, StCartItemAmountChangeInputfield, StCartItemImage, StCartItems, StCartTotal, StCartSection } from './Cart.styled'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { Icon } from '../Icon'
 
 export const Cart = () => {
     const navigate = useNavigate()
 
     const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
+
+    const categories = useContext(CategoryContext)
+    const getBrickMainCategory = (brick: Brick) => {
+        const brickCategory = categories && categories.find(category => category.id == brick.category.id)
+        return brickCategory && brickCategory.mainCategory && brickCategory.mainCategory.name.toLowerCase().split(' ').join('-')
+    }
 
     const onCartItemAmountChange = (cartItem: CartItem, amount: number) => {
         cartItem.amount = amount
@@ -130,38 +136,62 @@ export const Cart = () => {
                 inputfields={inputFields}
                 validationSchema={validationSchema}
                 onSubmit={(values) => placeOrder(values)}
-                submitText='Order'
+                submitText='Confirm order'
             />
             <StCartItems>
                 {
                     cart && cart.map((cartItem: CartItem, index: number) => {
                         return (
-                            <li
+                            <StCartItem
                                 key={index}
                             >
-                                <section>
-                                    <div>
-                                        <p>{cartItem.item.name}</p>
-                                        <p>&euro;{cartItem.item.price}</p>
-                                    </div>
-                                    <section>
-                                        <Button
-                                            faIconLeft='minus'
-                                        />
-                                        <input 
-                                            type='number'
-                                            value={cartItem.amount}
-                                            onChange={(event) => {onCartItemAmountChange(cartItem, parseInt(event.target.value))}}
-                                        />
-                                        <Button
-                                            faIconLeft='plus'
-                                        />
-                                    </section>
-                                </section>
-                            </li>
+                                <StCartSection>
+                                    <StCartSection>
+                                        <StCartItemImage src={`/assets/images/${getBrickMainCategory(cartItem.item)}/${cartItem.item.images[0]}`} alt={cartItem.item.name} />
+                                        <div>
+                                            <p>{cartItem.item.name}</p>
+                                            <p>&euro;{cartItem.item.price}</p>
+                                        </div>
+                                    </StCartSection>
+                                    <StCartSection>
+                                        <p>&euro;{cartItem.item.price * cartItem.amount}</p>
+                                        <StCartItemAmountChange>
+                                            <StCartItemAmountChangeButton
+                                                onClick={() => {onCartItemAmountChange(cartItem, cartItem.amount - 1)}}
+                                                >
+                                                <Icon name='minus' />
+                                            </StCartItemAmountChangeButton>
+                                            <StCartItemAmountChangeInputfield 
+                                                type='number'
+                                                value={cartItem.amount}
+                                                onChange={(event) => {onCartItemAmountChange(cartItem, parseInt(event.target.value))}}
+                                                />
+                                            <StCartItemAmountChangeButton
+                                                onClick={() => {onCartItemAmountChange(cartItem, cartItem.amount + 1)}}
+                                            >
+                                                <Icon name='plus' />
+                                            </StCartItemAmountChangeButton>
+                                        </StCartItemAmountChange>
+                                    </StCartSection>
+                                </StCartSection>
+                            </StCartItem>
                         )
                     })
                 }
+                <StCartTotal>
+                <StCartSection>
+                        <p>Subtotal</p>
+                        <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 0)}</p>
+                    </StCartSection>
+                    <StCartSection>
+                        <p>Shipping</p>
+                        <p>&euro;4.99</p>
+                    </StCartSection>
+                    <StCartSection>
+                        <p>Total</p>
+                        <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 4.99)}</p>
+                    </StCartSection>
+                </StCartTotal>
             </StCartItems>
         </section>
     )

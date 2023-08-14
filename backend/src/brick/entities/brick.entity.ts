@@ -24,7 +24,7 @@ export class Brick {
   @Field(() => String)
   description: string
 
-  @Column('decimal', { precision: 2 })
+  @Column('decimal', { precision: 2, scale: 2 })
   @Field(() => Float)
   price: number
 

@@ -15,10 +15,10 @@
     "dev:backend": "yarn workspace @brick-store/backend start:dev",
     "dev:frontend": "yarn workspace @brick-store/frontend dev",
     "build": "concurrently \"yarn build:backend\" \"yarn build:frontend\"",
-    "build:backend": "yarn workspace @brick-store/backend build",
+    "build:backend": "yarn workspace @brick-store/backend prebuild && yarn workspace @brick-store/backend build",
     "build:frontend": "yarn workspace @brick-store/frontend build",
     "start": "concurrently \"yarn start:backend\" \"yarn start:frontend\"",
-    "start:backend": "yarn workspace @brick-store/backend start",
+    "start:backend": "yarn workspace @brick-store/backend start:prod",
     "start:frontend": "yarn workspace @brick-store/frontend preview"
   },
   "repository": "https://github.com/pgmgent-pgm-5/coil-project-2022-ek2-BrentVanSteertegem",

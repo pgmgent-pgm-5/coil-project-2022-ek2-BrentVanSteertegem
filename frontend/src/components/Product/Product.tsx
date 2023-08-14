@@ -74,7 +74,7 @@ export const Product = ({ brick }: ProductProps) => {
             />
             <StMainInfo>
                 <h4>{brick && brick.name}</h4>
-                <p>&euro;{brick && brick.price}</p>
+                <p>&euro;{brick && brick.price.toFixed(2)}</p>
                 <StQuantitySelector>
                     <p>Quantity :</p>
                     <select

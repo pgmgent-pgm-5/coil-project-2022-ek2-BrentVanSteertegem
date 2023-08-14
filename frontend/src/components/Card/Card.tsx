@@ -31,7 +31,7 @@ export const Card = ({ item }: CardProps) => {
             />
             <section>
                 <p>{item!.name}</p>
-                <p>&euro;{item!.price}</p>
+                <p>&euro;{item!.price.toFixed(2)}</p>
             </section>
             <span>
                 <Button

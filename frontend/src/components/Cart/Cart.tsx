@@ -150,11 +150,11 @@ export const Cart = () => {
                                         <StCartItemImage src={`/assets/images/${getBrickMainCategory(cartItem.item)}/${cartItem.item.images[0]}`} alt={cartItem.item.name} />
                                         <div>
                                             <p>{cartItem.item.name}</p>
-                                            <p>&euro;{cartItem.item.price}</p>
+                                            <p>&euro;{cartItem.item.price.toFixed(2)}</p>
                                         </div>
                                     </StCartSection>
                                     <StCartSection>
-                                        <p>&euro;{cartItem.item.price * cartItem.amount}</p>
+                                        <p>&euro;{(cartItem.item.price * cartItem.amount).toFixed(2)}</p>
                                         <StCartItemAmountChange>
                                             <StCartItemAmountChangeButton
                                                 onClick={() => {onCartItemAmountChange(cartItem, cartItem.amount - 1)}}
@@ -179,18 +179,25 @@ export const Cart = () => {
                     })
                 }
                 <StCartTotal>
-                <StCartSection>
-                        <p>Subtotal</p>
-                        <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 0)}</p>
-                    </StCartSection>
-                    <StCartSection>
-                        <p>Shipping</p>
-                        <p>&euro;4.99</p>
-                    </StCartSection>
-                    <StCartSection>
-                        <p>Total</p>
-                        <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 4.99)}</p>
-                    </StCartSection>
+                    {
+                        cart && cart.length > 0 ?
+                            <>
+                                <StCartSection>
+                                    <p>Subtotal</p>
+                                    <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 0).toFixed(2)}</p>
+                                </StCartSection>
+                                <StCartSection>
+                                    <p>Shipping</p>
+                                    <p>&euro;4.99</p>
+                                </StCartSection>
+                                <StCartSection>
+                                    <p>Total</p>
+                                    <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 4.99).toFixed(2)}</p>
+                                </StCartSection>
+                            </>
+                        :
+                            <p>Your cart is empty!</p>
+                    }
                 </StCartTotal>
             </StCartItems>
         </section>

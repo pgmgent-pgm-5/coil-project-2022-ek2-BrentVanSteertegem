@@ -17,6 +17,7 @@ type Brick {
 type Category {
   id: Int!
   name: String!
+  description: String
   mainCategory: Category
   bricks: [Brick!]
 }
@@ -60,12 +61,14 @@ type Mutation {
 
 input CreateCategoryInput {
   name: String!
+  description: String
   mainCategoryId: Int
 }
 
 input UpdateCategoryInput {
   id: Int!
   name: String
+  description: String
   mainCategoryId: Int
 }
 

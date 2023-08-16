@@ -19,6 +19,10 @@ export class Category {
   @Field(() => String)
   name: string
 
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  description?: string
+
   @ManyToOne(() => Category, (category) => category.mainCategory, {
     onDelete: 'CASCADE',
   })

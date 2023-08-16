@@ -8,6 +8,10 @@ export class CreateCategoryInput {
   name: string
 
   @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  description?: string
+
+  @Column({ nullable: true })
   @Field(() => Int, { nullable: true })
   mainCategoryId?: number
 }

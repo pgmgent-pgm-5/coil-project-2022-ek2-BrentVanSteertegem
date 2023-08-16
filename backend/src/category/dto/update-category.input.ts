@@ -12,6 +12,10 @@ export class UpdateCategoryInput {
   name?: string
 
   @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  description?: string
+
+  @Column({ nullable: true })
   @Field(() => Int, { nullable: true })
   mainCategoryId?: number
 }

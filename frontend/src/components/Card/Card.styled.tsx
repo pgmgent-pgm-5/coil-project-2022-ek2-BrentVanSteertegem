@@ -2,6 +2,17 @@ import { styled } from 'styled-components'
 import { Variables } from '../../style'
 
 export const StCard = styled.div`
+    background-color: ${Variables.colors.lightGrey};
+    border-radius: ${Variables.rounded.small}rem;
+    padding: ${Variables.spacing.medium}rem;
+    margin-bottom: ${Variables.spacing.large}rem;
+
+    * {
+        margin: 0;
+    }
+`
+
+export const StItemCard = styled.div`
     width: 15rem;
     box-shadow: 0 0 ${Variables.spacing.xsmall}rem #0002;
     display: flex;

@@ -11,6 +11,7 @@ export enum Color {
 export type Category = {
   id: number
   name: string
+  description?: string
   mainCategory: Category | null
 }
 

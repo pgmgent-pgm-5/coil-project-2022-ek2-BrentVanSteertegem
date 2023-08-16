@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { Brick, Category, Color } from '../../types'
-import { Card } from '../Card'
+import { ItemCard } from '../Card'
 import { StCardLink, StNotification, StOverview, StPageItems, StPaginationContainer, StProductsList, StProductsOverview } from './Overview.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Filter } from '../Filter'
@@ -84,7 +84,7 @@ export const Overview = () => {
                             <StCardLink
                                 to={`${brick.name.toLocaleLowerCase().split(' ').join('_')}`}
                                 >
-                                <Card
+                                <ItemCard
                                     item={brick}
                                 />
                             </StCardLink>

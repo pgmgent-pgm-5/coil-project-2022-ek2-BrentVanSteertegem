@@ -8,6 +8,7 @@ export const StFilter = styled.div`
     padding: 0 ${Variables.spacing.medium}rem;
     margin-bottom: ${Variables.spacing.large}rem;
     background-color: ${Variables.colors.lightGrey};
+    border-radius: ${Variables.rounded.small}rem;
 
     @media (min-width: 33.5rem) {
         width: calc(100vw - 23.5rem);

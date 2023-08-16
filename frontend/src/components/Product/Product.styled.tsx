@@ -132,6 +132,7 @@ export const StRelatedProductsSection = styled.section`
 `
 
 export const StRelatedProducts = styled.section`
+    width: 100%;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 `

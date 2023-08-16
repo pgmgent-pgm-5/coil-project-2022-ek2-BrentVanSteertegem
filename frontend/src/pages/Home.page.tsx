@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 import { BrickContext, CategoryContext } from '../ContextProvider'
-import { CallToActionCard, CallToActionCardSection, Hero } from '../components'
+import { CallToActionCard, CallToActionCardSection, Hero, RelatedProducts } from '../components'
 
 export const HomePage = () => {
     const allCategories = useContext(CategoryContext)
     const mainCategories = allCategories && allCategories.filter((category) => category.mainCategory == null)
     
     const bricks = useContext(BrickContext)
+    const screenWidth = window.innerWidth / 16
 
     return (
         <>
@@ -25,24 +26,37 @@ export const HomePage = () => {
                 </div>
             </Hero>
             <CallToActionCardSection>
-                {mainCategories && mainCategories.map((category) => {
-                    const subCategories = allCategories && allCategories.filter((subCategory) => subCategory.mainCategory && subCategory.mainCategory.id == category.id)
-                    const brick = bricks && bricks.find((brick) => subCategories.find((subCategory) => subCategory.id == brick.category.id))
+                {
+                    mainCategories && mainCategories.slice(0, screenWidth < 58 || screenWidth >= 77 ? 
+                        4
+                    :
+                        3
+                    ).map((category) => {
+                        const subCategories = allCategories && allCategories.filter((subCategory) => subCategory.mainCategory && subCategory.mainCategory.id == category.id)
+                        const brick = bricks && bricks.find((brick) => subCategories.find((subCategory) => subCategory.id == brick.category.id))
 
-                    return (
-                        <div
-                            key={category.name}
-                        >
-                            <CallToActionCard
-                                image={`/assets/images/${category.name.toLocaleLowerCase().split(' ').join('-')}/${brick && brick.images[0]}`}
-                                imageAlt={category.name}
-                                title={category.name}
-                                href={`/${category.name == 'Other' ? 'other-products' : category.name.toLocaleLowerCase().split(' ').join('-')}`}
-                            />
-                        </div>
-                    )
-                })}
+                        return (
+                            <div
+                                key={category.id}
+                            >
+                                <CallToActionCard
+                                    image={`/assets/images/${category.name.toLocaleLowerCase().split(' ').join('-')}/${brick && brick.images[0]}`}
+                                    imageAlt={category.name}
+                                    title={category.name}
+                                    href={`/${category.name == 'Other' ? 'other-products' : category.name.toLocaleLowerCase().split(' ').join('-')}`}
+                                />
+                            </div>
+                        )
+                    })
+                }
             </CallToActionCardSection>
+            {
+                bricks && bricks.length > 0 &&
+                    <RelatedProducts
+                        title='New Arrivals'
+                        relatedProducts={[...bricks].sort((a, b) => b.id - a.id)}
+                    />
+            }
         </>
     )
 }

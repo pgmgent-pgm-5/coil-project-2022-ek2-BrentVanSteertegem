@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { Button } from '../Button'
-import { ItemCard } from '../Card'
 import { Brick, CartItem, Category } from '../../types'
-import { StExtraInfo, StExtraInfoButton, StExtraInfoContainer, StMainInfo, StProduct, StProductImage, StSection, StRelatedProducts, StRelatedProductsSection, StVariations, StCardLink, StVariationCard, StVariationImage, StQuantitySelector } from './Product.styled'
+import { StExtraInfo, StExtraInfoButton, StExtraInfoContainer, StMainInfo, StProduct, StProductImage, StSection, StVariations, StCardLink, StVariationCard, StVariationImage, StQuantitySelector } from './Product.styled'
 import { BrickContext, CartContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
+import { RelatedProducts } from './RelatedProducts'
 
 type ProductProps = {
     brick: Brick
@@ -64,7 +64,6 @@ export const Product = ({ brick }: ProductProps) => {
                 category.id == brick.category.id
             )
     ).filter((relatedBrick: Brick) => relatedBrick.id != brick.id)
-    const screenWidth = window.innerWidth / 16
 
     return (
         <StProduct>
@@ -154,27 +153,13 @@ export const Product = ({ brick }: ProductProps) => {
                     {renderExtraInfo()}
                 </StExtraInfoContainer>
             </StExtraInfo>
-            <StRelatedProductsSection>
-                <h4>Related products</h4>
-                <StRelatedProducts>
-                    {
-                        relatedProducts && relatedProducts.slice(0, screenWidth < 58 || screenWidth >= 77 ? 
-                            4
-                        :
-                            3
-                        ).map((relatedBrick: Brick, index: number) => (
-                            <StCardLink
-                                key={index}
-                                to={`${window.location.pathname.split('/').slice(0, -1).join('/')}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
-                            >
-                                <ItemCard
-                                    item={relatedBrick}
-                                />
-                            </StCardLink>
-                        ))
-                    }
-                </StRelatedProducts>
-            </StRelatedProductsSection>
+            {
+                relatedProducts && relatedProducts.length > 0 &&
+                    <RelatedProducts
+                        title='Related products'
+                        relatedProducts={relatedProducts}
+                    />
+            }
         </StProduct>
     )
 }

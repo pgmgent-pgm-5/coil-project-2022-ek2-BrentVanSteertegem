@@ -43,8 +43,6 @@ export const StCallToActionCardLink = styled(StLink)`
 `
 
 export const StCallToActionCard = styled(StItemCard)`
-    max-width: calc(100% - 3rem);
-
     p {
         font-size: 1.5rem;
         padding-right: 2px;
@@ -54,5 +52,6 @@ export const StCallToActionCard = styled(StItemCard)`
 
 export const StCallToActionCardSection = styled.section`
     margin: ${Variables.spacing.large}rem 0;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 `

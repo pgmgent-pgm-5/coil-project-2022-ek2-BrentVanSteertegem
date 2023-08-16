@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import { Variables } from '../../style'
+import { StLink } from '../Link/Link.styled'
 
 export const StCard = styled.div`
     background-color: ${Variables.colors.lightGrey};
@@ -34,4 +35,24 @@ export const StImage = styled.img`
     aspect-ratio: 1;
     object-fit: contain;
     margin: 0;
+`
+
+export const StCallToActionCardLink = styled(StLink)`
+    text-decoration: none;
+    color: inherit;
+`
+
+export const StCallToActionCard = styled(StItemCard)`
+    max-width: calc(100% - 3rem);
+
+    p {
+        font-size: 1.5rem;
+        padding-right: 2px;
+        font-family: ${Variables.fonts.logo};
+    }
+`
+
+export const StCallToActionCardSection = styled.section`
+    margin: ${Variables.spacing.large}rem 0;
+    justify-content: space-evenly;
 `

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import 'unfonts.css'
 import './style/reset.css'
-import { HashRouter, Navigate, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { DefaultLayout } from './components/index.ts'
 import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage, ProductPage, CartPage } from './pages'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ApolloProvider client={client}>
     <ContextProvider>
       <StrictMode>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route element={<App />}>
               <Route path='/' element={<DefaultLayout />}>
@@ -57,7 +57,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               </Route>
             </Route>
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </StrictMode>
     </ContextProvider>
   </ApolloProvider>

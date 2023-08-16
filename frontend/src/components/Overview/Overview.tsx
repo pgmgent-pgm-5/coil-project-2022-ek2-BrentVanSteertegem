@@ -28,14 +28,17 @@ export const Overview = () => {
     
     const [activeFilters, setActiveFilters] = useState<Map<string, string[]>>(new Map<string, string[]>([[ 'Category', [] ], ['Color', [] ]]))
     
-    const bricks = allBricks && subCategories && allBricks.filter((brick: Brick) => 
+    const filteredBricks = allBricks && subCategories && allBricks.filter((brick: Brick) => 
+        subCategories && subCategories.find((category: Category) => 
+            category.id == brick.category.id
+        )
+    )
+    const bricks = subCategories && filteredBricks && filteredBricks.filter((brick: Brick) => 
         activeFilters && activeFilters.get('Category')!.length > 0 ? 
             activeFilters.get('Category')!.find((category: string) => 
                 category == brick.category.name
             ):
-            subCategories.find((category: Category) => 
-                category.id == brick.category.id
-            )
+            filteredBricks
         ).filter((brick: Brick) =>
             activeFilters && activeFilters.get('Color')!.length > 0 ?
                 activeFilters.get('Color')!.find((color: string) =>

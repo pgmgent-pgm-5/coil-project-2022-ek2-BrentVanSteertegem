@@ -27,7 +27,7 @@ class CategoryFactory extends Factory {
       {
         name: 'Other',
         description:
-          "In this category you can find every lego piece that isn't just lego brick, a lego plate or a minifig piece. What other types of lego pieces are there, you might ask yourself. Well, there's also wheels (and tires to put on them), there are plants and animals or just some good old windows and doors to put in your lego dreamhouse. Of course there many more sorts of items in this category but we can't keep summing up every piece lego has ever made. Just browse this category if you're curious what else we have to offer and if you still haven't found what you're looking for, don't hesitate to contact us and we might be able to add to our assortiment of minifig pieces.",
+          "In this category you can find every lego piece that isn't just lego brick, a lego plate or a minifig piece. \"What other types of lego pieces are there?\", you might ask yourself. Well, there's also wheels (and tires to put on them), there are plants and animals or just some good old windows and doors to put in your lego dreamhouse. Of course there many more sorts of items in this category but we can't keep summing up every piece lego has ever made. Just browse this category if you're curious what else we have to offer and if you still haven't found what you're looking for, don't hesitate to contact us and we might be able to add to our assortiment of minifig pieces.",
       },
     ])
     this.categories.set('Bricks', [
@@ -95,9 +95,9 @@ class CategoryFactory extends Factory {
     const categoryRepository = appDataSource.getRepository(Category)
     this.categories.forEach(async (categories, main) => {
       const mainCategory =
-        main == null
-          ? null
-          : await categoryRepository.findOne({ where: { name: main } })
+        main !== null
+          ? await categoryRepository.findOne({ where: { name: main } })
+          : null
       if (categories && categories.length > 0) {
         categories.forEach(async (category) => {
           const record = await this.insert(category, mainCategory)
@@ -111,10 +111,25 @@ class CategoryFactory extends Factory {
     const repo = appDataSource.getRepository(Category)
 
     // check if record exists
-    let record = await repo.findOne({
-      where: { name: category.name, mainCategory },
-    })
-    if (record) return record
+    let record =
+      mainCategory == null
+        ? await repo.findOne({
+            where: { name: category.name, mainCategory: null },
+          })
+        : await repo.findOne({
+            where: {
+              name: category.name,
+              mainCategory: { id: mainCategory.id },
+            },
+            relations: ['mainCategory'],
+          })
+    if (record) {
+      const updatedRecord = await repo.save({
+        ...record,
+        ...category,
+      })
+      return updatedRecord
+    }
 
     // if record does not exist, create it
     record = await repo.save({ ...category, mainCategory })

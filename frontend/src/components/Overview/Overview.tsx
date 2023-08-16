@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { Brick, Category, Color } from '../../types'
 import { Card } from '../Card'
-import { StCardLink, StOverview, StPageItems, StPaginationContainer, StProductsList, StProductsOverview } from './Overview.styled'
+import { StCardLink, StNotification, StOverview, StPageItems, StPaginationContainer, StProductsList, StProductsOverview } from './Overview.styled'
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Filter } from '../Filter'
 import { Pagination } from '../Pagination'
@@ -66,7 +66,15 @@ export const Overview = () => {
             />
             <StProductsOverview>
                 <StPageItems>
-                    <p>Showing {(currentPage - 1) * itemsPerPage + 1}{pageBricks && pageBricks.length > 1 && ` - ${(currentPage - 1) * itemsPerPage +  pageBricks.length}`} of {bricks && bricks.length}</p>
+                    {
+                        pageBricks && pageBricks.length > 0 ?
+                            <p>Showing {(currentPage - 1) * itemsPerPage + 1}{pageBricks.length > 1 && ` - ${(currentPage - 1) * itemsPerPage +  pageBricks.length}`} of {bricks && bricks.length}</p>
+                        :
+                            <StNotification>
+                                <p>At this moment, there are no bricks in this category.</p>
+                                <p>Check again later!</p>
+                            </StNotification>
+                    }
                 </StPageItems>
                 <StProductsList>
                     {pageBricks && pageBricks.map((brick: Brick) => (

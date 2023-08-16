@@ -27,6 +27,11 @@ export const StPageItems = styled.section`
     }
 `
 
+export const StNotification = styled.section`
+    flex-direction: column;
+    align-items: center;
+`
+
 export const StPaginationContainer = styled.section`
     justify-content: center;
     padding-bottom: ${Variables.spacing.medium}rem;

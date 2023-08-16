@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { Button } from '../Button'
-import { Card } from '../Card'
+import { ItemCard } from '../Card'
 import { Brick, CartItem, Category } from '../../types'
 import { StExtraInfo, StExtraInfoButton, StExtraInfoContainer, StMainInfo, StProduct, StProductImage, StSection, StRelatedProducts, StRelatedProductsSection, StVariations, StCardLink, StVariationCard, StVariationImage, StQuantitySelector } from './Product.styled'
 import { BrickContext, CartContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
@@ -167,7 +167,7 @@ export const Product = ({ brick }: ProductProps) => {
                                 key={index}
                                 to={`${window.location.pathname.split('/').slice(0, -1).join('/')}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
                             >
-                                <Card
+                                <ItemCard
                                     item={relatedBrick}
                                 />
                             </StCardLink>

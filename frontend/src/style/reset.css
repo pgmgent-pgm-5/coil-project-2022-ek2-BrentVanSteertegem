@@ -76,7 +76,5 @@ div#root {
 }
 
 img {
-    aspect-ratio: 1;
-    object-fit: contain;
     font-size: 0.9rem;
 }

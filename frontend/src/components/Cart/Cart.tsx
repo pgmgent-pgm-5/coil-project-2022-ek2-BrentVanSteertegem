@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartContext, UpdateCartContext, CategoryContext } from '../../ContextProvider'
 import { Brick, CartItem } from '../../types'
 import { Form } from '../Form'
@@ -12,6 +12,9 @@ export const Cart = () => {
 
     const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
+
+    const [shippingMethod, setShippingMethod] = useState('standard')
+    const [shippingPrice, setShippingPrice] = useState(4.99)
 
     const categories = useContext(CategoryContext)
     const getBrickMainCategory = (brick: Brick) => {
@@ -73,6 +76,116 @@ export const Cart = () => {
             ]
         ],
         [
+            'Billing address',
+            [
+                // {
+                //     name: 'billing_sameAsShipping',
+                //     type: 'checkbox',
+                //     label: 'Same as shipping address',
+                // },
+                {
+                    name: 'billing_firstName',
+                    type: 'text',
+                    label: 'First name*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+                {
+                    name: 'billing_lastName',
+                    type: 'text',
+                    label: 'Last name*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+                {
+                    name: 'billing_street',
+                    type: 'text',
+                    label: 'Street*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+                {
+                    name: 'billing_houseNumber',
+                    type: 'text',
+                    label: 'House number*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+                {
+                    name: 'billing_zipCode',
+                    type: 'text',
+                    label: 'Zip code*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+                {
+                    name: 'billing_city',
+                    type: 'text',
+                    label: 'City*',
+                    placeholder: 'Leave blank to use shipping address'
+                },
+            ]
+        ],
+        [
+            'Shipping method',
+            [
+                {
+                    type: 'customInputfield',
+                    name: 'shippingMethod',
+                    value: shippingMethod,
+                },
+                {
+                    type: 'customInputfield',
+                    name: 'shippingPrice',
+                    value: shippingPrice,
+                },
+                <>
+                    <input 
+                        type='radio'
+                        name='shippingMethod' 
+                        value='pickup' 
+                        checked={shippingMethod == 'pickup'}
+                        onChange={() => {
+                            setShippingMethod('pickup')
+                            setShippingPrice(3.99)
+                        }} 
+                    />
+                    <label 
+                        htmlFor='pickup'
+                    > 
+                        Pick up at your post office (+ &euro;3.99)
+                    </label>
+                    <br />
+                    <input 
+                        type='radio'
+                        name='shippingMethod' 
+                        value='standard' 
+                        checked={shippingMethod == 'standard'}
+                        onChange={() => {
+                            setShippingMethod('standard')
+                            setShippingPrice(4.99)
+                        }} 
+                    />
+                    <label 
+                        htmlFor='standard'
+                    > 
+                        Standard delivery (+ &euro;4.99)
+                    </label>
+                    <br />
+                    <input 
+                        type='radio'
+                        name='nextDay' 
+                        value='nextDay' 
+                        checked={shippingMethod == 'nextDay'}
+                        onChange={() => {
+                            setShippingMethod('nextDay')
+                            setShippingPrice(5.99)
+                        }}
+                    />
+                    <label 
+                        htmlFor='nextDay'
+                    > 
+                        Next day delivery (+ &euro;5.99)
+                    </label>
+                </>
+            ]
+        ],
+        [
             'Payment',
             [
                 {
@@ -117,6 +230,12 @@ export const Cart = () => {
         houseNumber: Yup.string().required('Required'),
         zipCode: Yup.string().required('Required'),
         city: Yup.string().required('Required'),
+        // billing_sameAsShipping: Yup.boolean(),
+        // billing_lastName: Yup.string().required('Required'),
+        // billing_street: Yup.string().required('Required'),
+        // billing_houseNumber: Yup.string().required('Required'),
+        // billing_zipCode: Yup.string().required('Required'),
+        // billing_city: Yup.string().required('Required'),
         promoCode: Yup.string(),
         cardNumber: Yup.string().required('Required'),
         month: Yup.string().required('Required'),
@@ -188,11 +307,11 @@ export const Cart = () => {
                                 </StCartSection>
                                 <StCartSection>
                                     <p>Shipping</p>
-                                    <p>&euro;4.99</p>
+                                    <p>&euro;{shippingPrice}</p>
                                 </StCartSection>
                                 <StCartSection>
                                     <p>Total</p>
-                                    <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), 4.99).toFixed(2)}</p>
+                                    <p>&euro;{cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), shippingPrice).toFixed(2)}</p>
                                 </StCartSection>
                             </>
                         :

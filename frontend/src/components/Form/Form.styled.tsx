@@ -3,7 +3,7 @@ import { Form } from 'formik'
 import { Variables } from '../../style'
 import { StInputfield } from '../Inputfield/Inputfield.styled'
 import { StButton } from '../Button/Button.styled'
-import { StFormInputFieldProps } from './Form'
+import { StFormInputFieldProps, StFormSectionProps } from './Form'
 
 export const StForm = styled(Form)`
     display: flex;
@@ -14,11 +14,20 @@ export const StForm = styled(Form)`
     margin: 1rem 0;
 `
 
-export const StFormSection = styled.section`
+export const StFormSection = styled.section<StFormSectionProps>`
     display: flex;
-    flex-direction: column;
+    flex-direction: ${({ isCheckbox }) => isCheckbox ? 'row-reverse' : 'column'};
     gap: 0;
     margin-top: ${Variables.spacing.small}rem;
+
+    ${({ isCheckbox }) => isCheckbox && `
+        justify-content: flex-end;
+        align-items: center;
+
+        & > input {
+            width: 1rem;
+        }
+    `}
 `
 
 export const StFormLabelSection = styled.section`

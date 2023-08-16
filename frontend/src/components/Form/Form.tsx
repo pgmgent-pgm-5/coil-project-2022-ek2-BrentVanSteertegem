@@ -3,13 +3,17 @@ import { StForm, StFormButton, StFormInputField, StFormInputfieldError, StFormLa
 import { Icon } from '../Icon'
 import { ReactNode, isValidElement } from 'react'
 
-type Inputfield = {name: string, type: string, label?: string, placeholder?: string}
+type Inputfield = {name: string, type: string, label?: string, placeholder?: string, value?: string | number | boolean}
 
 type FormProps = {
-    inputfields: {name: string, type: string, label?: string, placeholder?: string}[] | Map<string, (Inputfield | ReactNode)[]>
+    inputfields: Inputfield[] | Map<string, (Inputfield | ReactNode)[]>
     validationSchema?: object,
     onSubmit: (values: object, setSubmitting: (isSubmitting: boolean) => void) => void,
     submitText: string,
+}
+
+export type StFormSectionProps = {
+    isCheckbox?: boolean
 }
 
 export type StFormInputFieldProps = {
@@ -27,7 +31,7 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
     const initialValues = localInputfields.reduce((prevValues, currentValue) => {
             return {
                 ...prevValues,
-                [currentValue.name]: currentValue.type === 'checkbox' ? false : ''
+                [currentValue.name]: currentValue.value !== undefined ? currentValue.value : currentValue.type === 'checkbox' ? false : ''
             }
         }, {})
 
@@ -48,6 +52,7 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                 return(
                                     <StFormSection
                                         key={inputfield.name}
+                                        isCheckbox={(inputfield as Inputfield).type == 'checkbox'}
                                     >
                                         <StFormLabelSection>
                                             <StLabel
@@ -68,7 +73,7 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                                 (inputfield as Inputfield).type === 'checkbox' ? 'checkbox' : 
                                                 (inputfield as Inputfield).type === 'password' ? 'password' : 'text'
                                             }
-                                            name={(inputfield as Inputfield).name} 
+                                            name={(inputfield as Inputfield).name}
                                             onChange={handleChange}
                                             onKeyDown={(e) => {
                                                 if(e.key == 'Enter' && localInputfields.findIndex((localInputfield) => localInputfield.name == (inputfield as Inputfield).name) < localInputfields.length - 1) {
@@ -90,8 +95,8 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                     [...inputfields.keys()].map((key) => {
                                         return(
                                             <StFormPart
-                                                id={key.split(' ').join('')}
-                                                key={key}
+                                            id={key.split(' ').join('')}
+                                            key={key}
                                             >
                                                 {
                                                     key.trim() !== '' && 
@@ -100,7 +105,7 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                                             <StFormPartDropdownButton
                                                                 type='button'
                                                                 onClick={() => document.querySelector(`#${key.split(' ').join('')}`)?.classList.toggle('closed')}
-                                                            >
+                                                                >
                                                                 <Icon
                                                                     name='chevron-up'
                                                                     />
@@ -109,50 +114,53 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                                 }
                                                 {
                                                     inputfields.get(key)?.map((inputfield) => {
-                                                        const error: string = errors && Object.values(errors)[Object.keys(errors).findIndex((error) => error == (inputfield as Inputfield).name)] as string
-                                                        const isTouched: boolean = touched && Object.values(touched)[Object.keys(touched).findIndex((touched) => touched == (inputfield as Inputfield).name)] as boolean
+                                                        if ((inputfield as Inputfield).type !== 'customInputfield') {
+                                                            const error: string = errors && Object.values(errors)[Object.keys(errors).findIndex((error) => error == (inputfield as Inputfield).name)] as string
+                                                            const isTouched: boolean = touched && Object.values(touched)[Object.keys(touched).findIndex((touched) => touched == (inputfield as Inputfield).name)] as boolean
 
-                                                        return(
-                                                            !isValidElement(inputfield) ?
-                                                                <StFormSection
+                                                            return(
+                                                                !isValidElement(inputfield) ?
+                                                                    <StFormSection
                                                                     key={(inputfield as Inputfield).name}
-                                                                >
-                                                                    <StFormLabelSection>
-                                                                        <StLabel
-                                                                            htmlFor={(inputfield as Inputfield).name}
-                                                                            >
-                                                                            {(inputfield as Inputfield).label}
-                                                                        </StLabel>
-                                                                        {
-                                                                            error && isTouched && 
-                                                                                <StFormInputfieldError>
-                                                                                    {error}
-                                                                                </StFormInputfieldError>
-                                                                        }
-                                                                    </StFormLabelSection>
-                                                                    <StFormInputField
-                                                                        placeholder={(inputfield as Inputfield).placeholder}
-                                                                        type={
-                                                                            (inputfield as Inputfield).type === 'checkbox' ? 'checkbox' : 
-                                                                            (inputfield as Inputfield).type === 'password' ? 'password' : 'text'
-                                                                        }
-                                                                        name={(inputfield as Inputfield).name} 
-                                                                        onChange={handleChange}
-                                                                        onKeyDown={(e) => {
-                                                                            if(e.key == 'Enter' && localInputfields.findIndex((localInputfield) => localInputfield.name == (inputfield as Inputfield).name) < localInputfields.length - 1) {
-                                                                                e.preventDefault()
-                                                                                // @ts-ignore
-                                                                                document.querySelector(`[name='${localInputfields[localInputfields.findIndex((localInputfield) => localInputfield.name == (inputfield as Inputfield).name) + 1].name}']`)!.focus()
-                                                                            } 
-                                                                        }}
-                                                                        // @ts-ignore
-                                                                        value={values[inputfield.name]}
-                                                                        hasError={error && isTouched ? true : false}
-                                                                    />
-                                                                </StFormSection>
-                                                            :
-                                                                inputfield
-                                                        )
+                                                                    isCheckbox={(inputfield as Inputfield).type == 'checkbox'}
+                                                                    >
+                                                                        <StFormLabelSection>
+                                                                            <StLabel
+                                                                                htmlFor={(inputfield as Inputfield).name}
+                                                                                >
+                                                                                {(inputfield as Inputfield).label}
+                                                                            </StLabel>
+                                                                            {
+                                                                                error && isTouched && 
+                                                                                    <StFormInputfieldError>
+                                                                                        {error}
+                                                                                    </StFormInputfieldError>
+                                                                            }
+                                                                        </StFormLabelSection>
+                                                                        <StFormInputField
+                                                                            placeholder={(inputfield as Inputfield).placeholder}
+                                                                            type={
+                                                                                (inputfield as Inputfield).type === 'checkbox' ? 'checkbox' : 
+                                                                                (inputfield as Inputfield).type === 'password' ? 'password' : 'text'
+                                                                            }
+                                                                            name={(inputfield as Inputfield).name}
+                                                                            onChange={handleChange}
+                                                                            onKeyDown={(e) => {
+                                                                                if(e.key == 'Enter' && localInputfields.findIndex((localInputfield) => localInputfield.name == (inputfield as Inputfield).name) < localInputfields.length - 1) {
+                                                                                    e.preventDefault()
+                                                                                    // @ts-ignore
+                                                                                    document.querySelector(`[name='${localInputfields[localInputfields.findIndex((localInputfield) => localInputfield.name == (inputfield as Inputfield).name) + 1].name}']`)!.focus()
+                                                                                } 
+                                                                            }}
+                                                                            // @ts-ignore
+                                                                            value={values[inputfield.name]}
+                                                                            hasError={error && isTouched ? true : false}
+                                                                        />
+                                                                    </StFormSection>
+                                                                :
+                                                                    inputfield
+                                                            )
+                                                        }
                                                     })
                                                 }
                                             </StFormPart>

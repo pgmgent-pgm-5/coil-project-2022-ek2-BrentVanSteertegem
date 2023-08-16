@@ -5,6 +5,7 @@ import { StCardLink, StNotification, StOverview, StPageItems, StPaginationContai
 import { BrickContext, CategoryContext } from '../../ContextProvider'
 import { Filter } from '../Filter'
 import { Pagination } from '../Pagination'
+import { useLocation } from 'react-router-dom'
 
 export const Overview = () => {
     const allCategories = useContext(CategoryContext)
@@ -59,6 +60,10 @@ export const Overview = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [currentPage])
+
+    useEffect(() => {
+        setActiveFilters(new Map<string, string[]>([[ 'Category', [] ], ['Color', [] ]]))
+    }, [useLocation()])
 
     return (
         <StOverview>

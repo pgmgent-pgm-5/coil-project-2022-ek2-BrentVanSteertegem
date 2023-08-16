@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { StFilter, StFilterItem, StFilterValue, StFilterValues } from './Filter.styled'
 
 export type FilterProps = {
@@ -17,6 +19,12 @@ export const Filter = ({ filters, activeFilters, setActiveFilters }: FilterProps
         setActiveFilters(activeFiltersCopy)
     }
 
+    useEffect(() => {
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach((checkbox) => {
+            (checkbox as HTMLInputElement).checked = false
+        })
+    }, [useLocation()])
+
     return (
         <StFilter>
             {filters && [...filters.keys()].map((filter, index) => (
@@ -31,6 +39,7 @@ export const Filter = ({ filters, activeFilters, setActiveFilters }: FilterProps
                             >
                                 <input 
                                     type='checkbox' 
+                                    value='false'
                                     onClick={() => onFilterClick(filter, value)}
                                 />
                                 <p>{value}</p>

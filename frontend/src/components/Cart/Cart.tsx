@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
 import { CartContext, UpdateCartContext, CategoryContext } from '../../ContextProvider'
 import { Brick, CartItem } from '../../types'
 import { Form } from '../Form'
 import { StCartItem, StCartItemAmountChange, StCartItemAmountChangeButton, StCartItemAmountChangeInputfield, StCartItemImage, StCartItems, StCartTotal, StCartSection } from './Cart.styled'
 import * as Yup from 'yup'
-import { useNavigate } from 'react-router-dom'
 import { Icon } from '../Icon'
+import { CREATE_ORDER } from '../../gql/mutations/createOrder'
 
 export const Cart = () => {
     const navigate = useNavigate()
@@ -13,7 +15,7 @@ export const Cart = () => {
     const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
 
-    const [shippingMethod, setShippingMethod] = useState('standard')
+    const [shippingMethod, setShippingMethod] = useState('STANDARD')
     const [shippingPrice, setShippingPrice] = useState(4.99)
 
     const categories = useContext(CategoryContext)
@@ -21,6 +23,8 @@ export const Cart = () => {
         const brickCategory = categories && categories.find(category => category.id == brick.category.id)
         return brickCategory && brickCategory.mainCategory && brickCategory.mainCategory.name.toLowerCase().split(' ').join('-')
     }
+
+    const [createOrder, {}] = useMutation(CREATE_ORDER)
 
     const onCartItemAmountChange = (cartItem: CartItem, amount: number) => {
         cartItem.amount = amount
@@ -79,42 +83,42 @@ export const Cart = () => {
             'Billing address',
             [
                 // {
-                //     name: 'billing_sameAsShipping',
+                //     name: 'billingSameAsShipping',
                 //     type: 'checkbox',
                 //     label: 'Same as shipping address',
                 // },
                 {
-                    name: 'billing_firstName',
+                    name: 'billingFirstName',
                     type: 'text',
                     label: 'First name*',
                     placeholder: 'Leave blank to use shipping address'
                 },
                 {
-                    name: 'billing_lastName',
+                    name: 'billingLastName',
                     type: 'text',
                     label: 'Last name*',
                     placeholder: 'Leave blank to use shipping address'
                 },
                 {
-                    name: 'billing_street',
+                    name: 'billingStreet',
                     type: 'text',
                     label: 'Street*',
                     placeholder: 'Leave blank to use shipping address'
                 },
                 {
-                    name: 'billing_houseNumber',
+                    name: 'billingHouseNumber',
                     type: 'text',
                     label: 'House number*',
                     placeholder: 'Leave blank to use shipping address'
                 },
                 {
-                    name: 'billing_zipCode',
+                    name: 'billingZipCode',
                     type: 'text',
                     label: 'Zip code*',
                     placeholder: 'Leave blank to use shipping address'
                 },
                 {
-                    name: 'billing_city',
+                    name: 'billingCity',
                     type: 'text',
                     label: 'City*',
                     placeholder: 'Leave blank to use shipping address'
@@ -138,15 +142,15 @@ export const Cart = () => {
                     <input 
                         type='radio'
                         name='shippingMethod' 
-                        value='pickup' 
-                        checked={shippingMethod == 'pickup'}
+                        value='PICKUP' 
+                        checked={shippingMethod == 'PICKUP'}
                         onChange={() => {
-                            setShippingMethod('pickup')
+                            setShippingMethod('PICKUP')
                             setShippingPrice(3.99)
                         }} 
                     />
                     <label 
-                        htmlFor='pickup'
+                        htmlFor='PICKUP'
                     > 
                         Pick up at your post office (+ &euro;3.99)
                     </label>
@@ -154,31 +158,31 @@ export const Cart = () => {
                     <input 
                         type='radio'
                         name='shippingMethod' 
-                        value='standard' 
-                        checked={shippingMethod == 'standard'}
+                        value='STANDARD' 
+                        checked={shippingMethod == 'STANDARD'}
                         onChange={() => {
-                            setShippingMethod('standard')
+                            setShippingMethod('STANDARD')
                             setShippingPrice(4.99)
                         }} 
                     />
                     <label 
-                        htmlFor='standard'
+                        htmlFor='STANDARD'
                     > 
                         Standard delivery (+ &euro;4.99)
                     </label>
                     <br />
                     <input 
                         type='radio'
-                        name='nextDay' 
-                        value='nextDay' 
-                        checked={shippingMethod == 'nextDay'}
+                        name='NEXTDAY' 
+                        value='NEXTDAY' 
+                        checked={shippingMethod == 'NEXTDAY'}
                         onChange={() => {
-                            setShippingMethod('nextDay')
+                            setShippingMethod('NEXTDAY')
                             setShippingPrice(5.99)
                         }}
                     />
                     <label 
-                        htmlFor='nextDay'
+                        htmlFor='NEXTDAY'
                     > 
                         Next day delivery (+ &euro;5.99)
                     </label>
@@ -201,19 +205,19 @@ export const Cart = () => {
                     placeholder: 'Card number'
                 },
                 {
-                    name: 'month',
+                    name: 'cardExpirationMonth',
                     type: 'number',
                     label: 'Month',
                     placeholder: '01'
                 },
                 {
-                    name: 'year',
+                    name: 'cardExpirationYear',
                     type: 'number',
                     label: 'Year',
                     placeholder: '2023'
                 },
                 {
-                    name: 'securityCode',
+                    name: 'cardSecurityCode',
                     type: 'text',
                     label: 'Security code',
                     placeholder: 'Security code'
@@ -230,21 +234,37 @@ export const Cart = () => {
         houseNumber: Yup.string().required('Required'),
         zipCode: Yup.string().required('Required'),
         city: Yup.string().required('Required'),
-        // billing_sameAsShipping: Yup.boolean(),
-        // billing_lastName: Yup.string().required('Required'),
-        // billing_street: Yup.string().required('Required'),
-        // billing_houseNumber: Yup.string().required('Required'),
-        // billing_zipCode: Yup.string().required('Required'),
-        // billing_city: Yup.string().required('Required'),
+        // billingSameAsShipping: Yup.boolean(),
+        // billingLastName: Yup.string().required('Required'),
+        // billingStreet: Yup.string().required('Required'),
+        // billingHouseNumber: Yup.string().required('Required'),
+        // billingZipCode: Yup.string().required('Required'),
+        // billingCity: Yup.string().required('Required'),
         promoCode: Yup.string(),
         cardNumber: Yup.string().required('Required'),
-        month: Yup.string().required('Required'),
-        year: Yup.string().required('Required'),
-        securityCode: Yup.string().required('Required')
+        cardExpirationMonth: Yup.number().required('Required'),
+        cardExpirationYear: Yup.number().required('Required'),
+        cardSecurityCode: Yup.string().required('Required')
     })
 
     const placeOrder = (values: object) => {
-        console.log(values, cart) // TODO: Actually create an order
+        createOrder({
+            variables: {
+                createOrderInput: {
+                    ...values,
+                    // @ts-ignore
+                    cardExpirationMonth: parseInt(values.cardExpirationMonth),
+                    // @ts-ignore
+                    cardExpirationYear: parseInt(values.cardExpirationYear),
+                    shippingMethod,
+                    shippingPrice,
+                    items: cart.map((cartItem: CartItem) => {
+                        return JSON.stringify(cartItem)
+                    }),
+                    total: parseFloat(cart && cart.reduce((total: number, cartItem: CartItem) => total + (cartItem.item.price * cartItem.amount), shippingPrice).toFixed(2))
+                }
+            }
+        })
         updateCart && updateCart([])
         navigate('/') // TODO: Navigate to order confirmation screen
     }

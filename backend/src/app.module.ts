@@ -10,6 +10,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo'
 import { join } from 'path'
 import { BrickModule } from './brick/brick.module'
+import { OrderModule } from './order/order.module'
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -40,6 +41,7 @@ import { BrickModule } from './brick/brick.module'
     AuthModule,
     UserModule,
     BrickModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

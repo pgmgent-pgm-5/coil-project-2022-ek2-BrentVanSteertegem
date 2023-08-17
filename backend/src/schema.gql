@@ -36,6 +36,38 @@ enum Role {
   GUEST
 }
 
+type Order {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  email: String!
+  street: String!
+  houseNumber: String!
+  zipCode: String!
+  city: String!
+  billingFirstName: String
+  billingLastName: String
+  billingStreet: String
+  billingHouseNumber: String
+  billingZipCode: String
+  billingCity: String
+  shippingMethod: ShippingMethod!
+  shippingPrice: Float!
+  promoCode: String
+  cardNumber: String!
+  cardExpirationMonth: Int!
+  cardExpirationYear: Int!
+  cardSecurityCode: String!
+  total: Float!
+  items: [String!]!
+}
+
+enum ShippingMethod {
+  PICKUP
+  STANDARD
+  NEXTDAY
+}
+
 type Query {
   getCategories: [Category!]!
   getCategoryById(id: Float!): Category!
@@ -45,6 +77,8 @@ type Query {
   getUserByEmail(email: String!): User!
   getBricks: [Brick!]!
   getBrickById(id: Float!): Brick!
+  getOrders: [Order!]!
+  getOrderById(id: Float!): Order!
 }
 
 type Mutation {
@@ -58,6 +92,8 @@ type Mutation {
   createBrick(createBrickInput: CreateBrickInput!): Brick!
   updateBrick(updateBrickInput: UpdateBrickInput!): Brick!
   removeBrick(id: Float!): Brick!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  removeOrder(id: Float!): Order!
 }
 
 input CreateCategoryInput {
@@ -111,4 +147,29 @@ input UpdateBrickInput {
   categoryId: Int
   images: [String!]
   variationIds: [Int!]
+}
+
+input CreateOrderInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  street: String!
+  houseNumber: String!
+  zipCode: String!
+  city: String!
+  billingFirstName: String
+  billingLastName: String
+  billingStreet: String
+  billingHouseNumber: String
+  billingZipCode: String
+  billingCity: String
+  shippingMethod: ShippingMethod!
+  shippingPrice: Float!
+  promoCode: String
+  cardNumber: String!
+  cardExpirationMonth: Int!
+  cardExpirationYear: Int!
+  cardSecurityCode: String!
+  total: Float!
+  items: [String!]!
 }

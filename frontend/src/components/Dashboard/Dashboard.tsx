@@ -27,16 +27,16 @@ export const Dashboard = () => {
                     <StDashboardAdministration>
                         <div>
                             <h4>Users</h4>
-                            <p>There {users && users.length !== 1 ? `are ${users.length} users` : 'is 1 user'} registered.</p>
+                            <p>There {users && users.length > 0 ? users.length !== 1 ? `are ${users.length} users` : 'is 1 user' : 'are 0 users'} registered.</p>
                         </div>
                         <div>
                             <h4>Bricks</h4>
-                            <p>There {bricks && bricks.length !== 1 ? `are ${bricks.length} bricks` : 'is 1 brick'} available.</p>
+                            <p>There {bricks && bricks.length > 0 ? bricks.length !== 1 ? `are ${bricks.length} bricks` : 'is 1 brick' : 'are 0 bricks'} available.</p>
                             <p>{bricks && [...bricks].filter((brick: Brick) => brick.quantity < 200).length} bricks have got less than 200 pieces available.</p>
                         </div>
                         <div>
                             <h4>Categories</h4>
-                            <p>There {categories && categories.length !== 1 ? `are ${categories.length} categories` : 'is 1 category'} available.</p>
+                            <p>There {categories && categories.length > 0 ? categories.length !== 1 ? `are ${categories.length} categories` : 'is 1 category' : 'are 0 categories'} available.</p>
                         </div>
                         <div>
                             <h4>Orders</h4>

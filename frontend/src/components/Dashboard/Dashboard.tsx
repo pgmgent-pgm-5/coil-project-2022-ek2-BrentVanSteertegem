@@ -32,7 +32,7 @@ export const Dashboard = () => {
                         <div>
                             <h4>Bricks</h4>
                             <p>There are {bricks && [...bricks].filter((brick: Brick) => brick.quantity > 0).length} bricks available.</p>
-                            <p>{[...bricks].filter((brick: Brick) => brick.quantity < 200).length} bricks have got less than 200 pieces available.</p>
+                            <p>{bricks && [...bricks].filter((brick: Brick) => brick.quantity < 200).length} bricks have got less than 200 pieces available.</p>
                         </div>
                         <div>
                             <h4>Categories</h4>

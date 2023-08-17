@@ -3,6 +3,7 @@ import { UserService } from './user.service'
 import { CreateUserInput } from './dto/create-user.input'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
+import { Public } from 'src/auth/auth.guard'
 
 @Resolver(() => User)
 export class UserResolver {
@@ -15,6 +16,7 @@ export class UserResolver {
     return this.userService.create(createUserInput)
   }
 
+  @Public()
   @Query(() => [User], { name: 'getUsers' })
   findAll(): Promise<User[]> {
     return this.userService.findAll()

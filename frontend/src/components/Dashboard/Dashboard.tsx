@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer } from './Dashboard.styled'
+import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDashboardList } from './Dashboard.styled'
 import { Button } from '../Button'
+import { useCustomHook } from '../../hooks'
+import { GET_USERS } from '../../gql/queries/getUsers'
+import { User } from '../../types'
 
 export type StDashboardButtonProps = {
     isActive: boolean
@@ -8,6 +11,7 @@ export type StDashboardButtonProps = {
 
 export const Dashboard = () => {
     const [dashboardContent, setDashboardContent] = useState<'administration' | 'customers' | 'store' | 'orders' | 'shipping'>('administration')
+    const users = useCustomHook(GET_USERS).getUsers
 
     const renderDashBoardContent = () => {
         switch (dashboardContent) {
@@ -17,7 +21,27 @@ export const Dashboard = () => {
                 )
             case 'customers':
                 return (
-                    <p>Customer management</p> // TODO: Add reviews
+                    <>
+                        <h4>Users</h4>
+                        <StDashboardList>
+                            <li>
+                                <span>id</span>
+                                <span>First name</span>
+                                <span>Last name</span>
+                                <span>Email</span>
+                                <span>Role</span>
+                            </li>
+                            {users && users.map((user: User) => (
+                                <li key={user.id}>
+                                    <span>{user.id}</span>
+                                    <span>{user.firstName}</span>
+                                    <span>{user.lastName}</span>
+                                    <span>{user.email}</span>
+                                    <span>{user.role}</span>
+                                </li>
+                            ))}
+                        </StDashboardList>
+                    </>
                 )
             case 'store':
                 return (
@@ -92,7 +116,6 @@ export const Dashboard = () => {
                     </StDashboardButton>
                 </div>
                 <StDashboardContentContainer>
-                    <h4>{dashboardContent.charAt(0).toUpperCase()+dashboardContent.slice(1)}</h4>
                     {renderDashBoardContent()}
                 </StDashboardContentContainer>
             </StDashboard>

@@ -31,3 +31,12 @@ export type CartItem = {
   item: Brick
   amount: number
 }
+
+export type User = {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  role: string
+}

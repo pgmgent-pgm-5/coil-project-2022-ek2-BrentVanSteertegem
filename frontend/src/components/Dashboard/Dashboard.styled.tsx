@@ -62,3 +62,31 @@ export const StDashboardContentContainer = styled.div`
         white-space: normal;
     }
 `
+
+export const StDashboardList = styled.ul`
+    list-style-type: none;
+    margin: 0;
+    border: 1px solid ${Variables.colors.grey}b;
+    
+    li {
+        margin: 0;
+        padding: ${Variables.spacing.small}rem;
+        display: grid;
+        grid-template-columns: 2rem repeat(4, 1fr);
+        
+        span {
+            margin: 0;
+        }
+        
+        &:first-of-type {
+
+            span {
+                font-weight: bold;
+            }
+        }
+
+        &:nth-child(even) {
+            background-color: ${Variables.colors.white};
+        }
+    }
+`

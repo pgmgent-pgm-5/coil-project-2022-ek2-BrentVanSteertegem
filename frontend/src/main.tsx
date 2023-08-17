@@ -4,7 +4,7 @@ import App from './App.tsx'
 import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
-import { DefaultLayout } from './components/index.ts'
+import { Dashboard, DefaultLayout } from './components/index.ts'
 import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage, ProductPage, CartPage } from './pages'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { ContextProvider } from './ContextProvider.tsx'
@@ -18,6 +18,9 @@ const client = new ApolloClient({
   credentials: 'include'
 })
 
+const accessToken = JSON.parse(localStorage.getItem('accessToken') || '{}')
+const accessTokenIsValid = accessToken?.createdAt && Date.now() - accessToken.createdAt < 3600000
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ApolloProvider client={client}>
     <ContextProvider>
@@ -26,13 +29,16 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Routes>
             <Route element={<App />}>
               <Route path='dashboard'>
+                {
+                  accessTokenIsValid &&
+                    <Route index element={<Dashboard />} />
+                }
                 <Route path='login' element={<DefaultLayout />}>
                   <Route index element={<LoginPage />} />
                 </Route>
                 <Route path='*' element={<DefaultLayout />}>
                   <Route index element={<PageNotFound />} />
                 </Route>
-                {/* <Route path='*' element={<Navigate to='/dashboard/login' replace={true} />} /> */}
               </Route>
               <Route path='/' element={<DefaultLayout />}>
                 <Route index element={<HomePage />} />

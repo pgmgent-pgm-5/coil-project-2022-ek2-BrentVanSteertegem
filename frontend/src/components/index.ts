@@ -17,3 +17,5 @@ export * from './Overview'
 export * from './Pagination'
 export * from './Product'
 export * from './Searchbar'
+
+export * from './Dashboard'

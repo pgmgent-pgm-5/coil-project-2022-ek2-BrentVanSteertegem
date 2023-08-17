@@ -4,7 +4,7 @@ import { CreateBrickInput } from '../../brick/dto/create-brick.input'
 import { Brick } from '../../brick/entities/brick.entity'
 import { appDataSource } from '../Seed'
 
-class CategoryFactory extends Factory {
+class BrickFactory extends Factory {
   bricks: Map<string, Partial<CreateBrickInput>[]>
   colors: string[] = [
     'Red',
@@ -103,4 +103,4 @@ class CategoryFactory extends Factory {
   }
 }
 
-export default new CategoryFactory()
+export default new BrickFactory()

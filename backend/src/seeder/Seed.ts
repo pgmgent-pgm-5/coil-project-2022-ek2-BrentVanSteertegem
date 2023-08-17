@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm'
 import DatabaseSeeder from './DatabaseSeeder'
 import CategoryFactory from './factories/Category.factory'
 import BrickFactory from './factories/Brick.factory'
+import UserFactory from './factories/User.factory'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -21,6 +22,13 @@ const seed = async () => {
   const dbSeeder = new DatabaseSeeder(appDataSource)
 
   let totalRecords = []
+
+  // Seed users
+  await dbSeeder.run(UserFactory).then((records) => {
+    console.log(`${records.length} seeded in db`)
+    console.log(records)
+    totalRecords = [...totalRecords, ...records]
+  })
 
   // Seed categories
   await dbSeeder.run(CategoryFactory).then((records) => {

@@ -4,6 +4,7 @@ import { CreateUserInput } from './dto/create-user.input'
 import { UpdateUserInput } from './dto/update-user.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService {
@@ -13,7 +14,10 @@ export class UserService {
   ) {}
 
   async create(createUserInput: CreateUserInput): Promise<User> {
-    const user = this.userRepository.create(createUserInput)
+    const user = this.userRepository.create({
+      ...createUserInput,
+      password: await bcrypt.hash(createUserInput.password, 10),
+    })
     return this.userRepository.save(user)
   }
 
@@ -38,7 +42,12 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: { id: id },
     })
-    const updatedUser = this.userRepository.merge(user, fieldsToUpdate)
+    const updatedUser = this.userRepository.merge(user, {
+      ...fieldsToUpdate,
+      password: fieldsToUpdate.password
+        ? await bcrypt.hash(fieldsToUpdate.password, 10)
+        : await bcrypt.hash(user.password, 10),
+    })
     return this.userRepository.save(updatedUser)
   }
 

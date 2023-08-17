@@ -10,7 +10,7 @@ export class CreateUserInput {
 
   @Column()
   @Field(() => String)
-  lasttName: string
+  lastName: string
 
   @Column()
   @Field(() => String)

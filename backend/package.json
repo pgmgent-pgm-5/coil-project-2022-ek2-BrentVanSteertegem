@@ -34,7 +34,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^10.0.0",
     "@types/faker": "^6.6.9",
-    "ts-node": "^10.0.0",
+    "bcrypt": "^5.1.1",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "faker": "^6.6.6",
     "graphql": "^16.7.1",
@@ -42,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "ts-node": "^10.0.0",
     "typeorm": "^0.3.17",
     "typeorm-seeding": "^1.6.1"
   },

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDatshboardListTitle, StDashboardList } from './Dashboard.styled'
+import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDatshboardListTitle, StDashboardList, StDashboardAdministration } from './Dashboard.styled'
 import { Button } from '../Button'
 import { useCustomHook } from '../../hooks'
 import { GET_USERS } from '../../gql/queries/getUsers'
@@ -24,7 +24,25 @@ export const Dashboard = () => {
         switch (dashboardContent) {
             case 'administration':
                 return (
-                    <p>Administration</p> // TODO: Add administration
+                    <StDashboardAdministration>
+                        <div>
+                            <h4>Users</h4>
+                            <p>There {users && users.length !== 1 ? `are ${users.length} users` : 'is 1 user'} registered.</p>
+                        </div>
+                        <div>
+                            <h4>Bricks</h4>
+                            <p>There are {bricks && [...bricks].filter((brick: Brick) => brick.quantity > 0).length} bricks available.</p>
+                            <p>{[...bricks].filter((brick: Brick) => brick.quantity < 200).length} bricks have got less than 200 pieces available.</p>
+                        </div>
+                        <div>
+                            <h4>Categories</h4>
+                            <p>There {categories && categories.length !== 1 ? `are ${categories.length} categories` : 'is 1 category'} available.</p>
+                        </div>
+                        <div>
+                            <h4>Orders</h4>
+                            <p>There are 0 orders.</p> // TODO: Add orders
+                        </div>
+                    </StDashboardAdministration>
                 )
             case 'customers':
                 return (

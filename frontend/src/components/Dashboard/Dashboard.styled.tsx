@@ -106,3 +106,13 @@ export const StDashboardList = styled.div<StDashboardListProps>`
 export const StDatshboardListTitle = styled.h4`
     padding-left: ${Variables.spacing.small}rem;
 `
+
+export const StDashboardAdministration = styled.div`
+    div {
+        margin-top: ${Variables.spacing.medium}rem;
+
+        &:not(:first-of-type) {
+            margin-top: ${Variables.spacing.large}rem;
+        }
+    }
+`

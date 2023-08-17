@@ -1,17 +1,24 @@
 import { useState } from 'react'
-import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDashboardList } from './Dashboard.styled'
+import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDatshboardListTitle, StDashboardList } from './Dashboard.styled'
 import { Button } from '../Button'
 import { useCustomHook } from '../../hooks'
 import { GET_USERS } from '../../gql/queries/getUsers'
-import { User } from '../../types'
+import { Brick, Category, User } from '../../types'
+import { GET_BRICKS, GET_CATEGORIES } from '../../gql/queries'
 
 export type StDashboardButtonProps = {
     isActive: boolean
 }
 
+export type StDashboardListProps = {
+    columns?: string
+}
+
 export const Dashboard = () => {
     const [dashboardContent, setDashboardContent] = useState<'administration' | 'customers' | 'store' | 'orders' | 'shipping'>('administration')
     const users = useCustomHook(GET_USERS).getUsers
+    const bricks = useCustomHook(GET_BRICKS).getBricks
+    const categories = useCustomHook(GET_CATEGORIES).getCategories
 
     const renderDashBoardContent = () => {
         switch (dashboardContent) {
@@ -21,31 +28,69 @@ export const Dashboard = () => {
                 )
             case 'customers':
                 return (
-                    <>
-                        <h4>Users</h4>
-                        <StDashboardList>
-                            <li>
-                                <span>id</span>
-                                <span>First name</span>
-                                <span>Last name</span>
-                                <span>Email</span>
-                                <span>Role</span>
-                            </li>
-                            {users && users.map((user: User) => (
-                                <li key={user.id}>
-                                    <span>{user.id}</span>
-                                    <span>{user.firstName}</span>
-                                    <span>{user.lastName}</span>
-                                    <span>{user.email}</span>
-                                    <span>{user.role}</span>
-                                </li>
-                            ))}
-                        </StDashboardList>
-                    </>
+                    <StDashboardList
+                        columns='2rem repeat(4, 1fr)'
+                    >
+                        <StDatshboardListTitle>Users</StDatshboardListTitle>
+                        <li>
+                            <span>id</span>
+                            <span>First name</span>
+                            <span>Last name</span>
+                            <span>Email</span>
+                            <span>Role</span>
+                        </li>
+                        <ul>
+                            {
+                                users && users.map((user: User) => (
+                                    <li key={user.id}>
+                                        <span>{user.id}</span>
+                                        <span>{user.firstName}</span>
+                                        <span>{user.lastName}</span>
+                                        <span>{user.email}</span>
+                                        <span>{user.role}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </StDashboardList>
                 )
             case 'store':
                 return (
-                    <p>Store management</p> // TODO: Add store
+                    <StDashboardList
+                        columns='2rem 2fr 2fr 1fr 1fr 1fr 1fr 1fr'
+                    >
+                        <StDatshboardListTitle>Bricks</StDatshboardListTitle>
+                        <li>
+                            <span>id</span>
+                            <span>Name</span>
+                            <span>Description</span>
+                            <span>Price</span>
+                            <span>Color</span>
+                            <span>Quantity</span>
+                            <span>Category</span>
+                            <span>Image</span>
+                        </li>
+                        <ul>
+                            {
+                                bricks && [...bricks].sort((a: Brick, b: Brick) => a.id - b.id).map((brick: Brick) => {
+                                    const category = categories && categories.find((category: Category) => category.id == brick.category.id)
+
+                                    return (
+                                        <li key={brick.id}>
+                                            <span>{brick.id}</span>
+                                            <span>{brick.name}</span>
+                                            <span>{brick.description}</span>
+                                            <span>&euro;{brick.price.toFixed(2)}</span>
+                                            <span>{brick.color}</span>
+                                            <span>{brick.quantity}</span>
+                                            <span>{brick.category.name}</span>
+                                            <img src={`/assets/images/${category.mainCategory.name.toLowerCase().split(' ').join('_')}/${brick.images[0]}`} alt={brick.name} />
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </StDashboardList>
                 )
             case 'orders':
                 return (

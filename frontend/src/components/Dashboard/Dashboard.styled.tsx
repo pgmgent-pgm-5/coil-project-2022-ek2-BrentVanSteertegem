@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { Variables } from '../../style'
-import { StDashboardButtonProps } from './Dashboard'
+import { StDashboardButtonProps, StDashboardListProps } from './Dashboard'
 import { StButtonText } from '../Button/Button.styled'
 
 export const StDashboardContainer = styled.div`
@@ -48,6 +48,7 @@ export const StDashboardContentContainer = styled.div`
     padding-top: ${Variables.spacing.small}rem;
     border: 1px solid ${Variables.colors.grey}b;
     border-radius: 0 ${Variables.rounded.small}rem ${Variables.rounded.small}rem 0;
+    overflow: hidden;
 
     h4, p {
         margin: 0;
@@ -63,30 +64,45 @@ export const StDashboardContentContainer = styled.div`
     }
 `
 
-export const StDashboardList = styled.ul`
-    list-style-type: none;
-    margin: 0;
-    border: 1px solid ${Variables.colors.grey}b;
-    
-    li {
+export const StDashboardList = styled.div<StDashboardListProps>`
+    ul {
         margin: 0;
-        padding: ${Variables.spacing.small}rem;
-        display: grid;
-        grid-template-columns: 2rem repeat(4, 1fr);
-        
-        span {
-            margin: 0;
-        }
-        
-        &:first-of-type {
+        border: 1px solid ${Variables.colors.grey}b;
 
+        max-height: calc(calc(100vh - 2rem) - 11.2rem);
+        overflow-y: scroll;
+    }
+
+    & > li {
+        &:first-of-type {
             span {
                 font-weight: bold;
             }
+        }
+    }
+
+    li {
+        list-style-type: none;
+        margin: 0;
+        padding: ${Variables.spacing.small}rem;
+        display: grid;
+
+        grid-template-columns: ${({ columns }) => columns ? columns : 'repeat(5, 1fr)'};
+        
+        span {
+            margin: 0;
         }
 
         &:nth-child(even) {
             background-color: ${Variables.colors.white};
         }
+
+        img {
+            width: 100%;
+        }
     }
+`
+
+export const StDatshboardListTitle = styled.h4`
+    padding-left: ${Variables.spacing.small}rem;
 `

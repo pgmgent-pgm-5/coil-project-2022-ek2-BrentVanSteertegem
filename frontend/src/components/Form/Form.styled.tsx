@@ -4,6 +4,7 @@ import { Variables } from '../../style'
 import { StInputfield } from '../Inputfield/Inputfield.styled'
 import { StButton } from '../Button/Button.styled'
 import { StFormInputFieldProps, StFormSectionProps } from './Form'
+import { StErrorProps } from '.'
 
 export const StForm = styled(Form)`
     display: flex;
@@ -94,4 +95,22 @@ export const StFormPartDropdownButton = styled.button`
     cursor: pointer;
     padding: 0;
     margin: ${Variables.spacing.small}rem 0;
+`
+
+export const StLoginFormContainer = styled.section`
+    flex-direction: column;
+
+    > * {
+        margin: 0;
+    }
+`
+
+export const StError = styled.p<StErrorProps>`
+    padding-left: ${Variables.spacing.medium + Variables.spacing.xsmall}rem;
+    color: ${Variables.colors.errorText};
+    visibility: hidden;
+
+    ${({ isError }) => isError && `
+        visibility: visible;
+    `}
 `

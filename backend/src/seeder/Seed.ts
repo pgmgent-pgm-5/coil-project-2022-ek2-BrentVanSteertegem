@@ -3,6 +3,7 @@ import DatabaseSeeder from './DatabaseSeeder'
 import CategoryFactory from './factories/Category.factory'
 import BrickFactory from './factories/Brick.factory'
 import UserFactory from './factories/User.factory'
+import Orderfactory from './factories/Orderfactory'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -39,6 +40,13 @@ const seed = async () => {
 
   // Seed bricks
   await dbSeeder.run(BrickFactory).then((records) => {
+    console.log(`${records.length} seeded in db`)
+    console.log(records)
+    totalRecords = [...totalRecords, ...records]
+  })
+
+  // Seed orders
+  await dbSeeder.run(Orderfactory).then((records) => {
     console.log(`${records.length} seeded in db`)
     console.log(records)
     totalRecords = [...totalRecords, ...records]

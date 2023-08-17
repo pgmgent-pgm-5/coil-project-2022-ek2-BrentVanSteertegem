@@ -25,8 +25,16 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <BrowserRouter>
           <Routes>
             <Route element={<App />}>
+              <Route path='dashboard'>
+                <Route path='login' element={<DefaultLayout />}>
+                  <Route index element={<LoginPage />} />
+                </Route>
+                <Route path='*' element={<DefaultLayout />}>
+                  <Route index element={<PageNotFound />} />
+                </Route>
+                {/* <Route path='*' element={<Navigate to='/dashboard/login' replace={true} />} /> */}
+              </Route>
               <Route path='/' element={<DefaultLayout />}>
-                <Route path='admin/login' element={<LoginPage />} />
                 <Route index element={<HomePage />} />
                 <Route path='home' element={<Navigate to='/' replace={true} />} />
                 <Route path='FAQ' element={<FAQPage />} />

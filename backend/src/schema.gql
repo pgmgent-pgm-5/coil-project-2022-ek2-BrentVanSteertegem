@@ -51,7 +51,7 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Float!): Category!
-  login(loginInput: LoginDto!): String!
+  login(email: String!, password: String!): String!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Float!): User!
@@ -71,11 +71,6 @@ input UpdateCategoryInput {
   name: String
   description: String
   mainCategoryId: Int
-}
-
-input LoginDto {
-  email: String!
-  password: String!
 }
 
 input CreateUserInput {

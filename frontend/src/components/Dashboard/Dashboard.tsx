@@ -2,9 +2,8 @@ import { useState } from 'react'
 import { StAuthContainer, StDashboard, StDashboardContainer, StDashboardButton, StDashboardContentContainer, StDatshboardListTitle, StDashboardList, StDashboardAdministration } from './Dashboard.styled'
 import { Button } from '../Button'
 import { useCustomHook } from '../../hooks'
-import { GET_USERS } from '../../gql/queries/getUsers'
-import { Brick, Category, User } from '../../types'
-import { GET_BRICKS, GET_CATEGORIES } from '../../gql/queries'
+import { Brick, Category, Order, User } from '../../types'
+import { GET_BRICKS, GET_CATEGORIES, GET_ORDERS, GET_USERS } from '../../gql/queries'
 
 export type StDashboardButtonProps = {
     isActive: boolean
@@ -19,6 +18,7 @@ export const Dashboard = () => {
     const users = useCustomHook(GET_USERS).getUsers
     const bricks = useCustomHook(GET_BRICKS).getBricks
     const categories = useCustomHook(GET_CATEGORIES).getCategories
+    const orders = useCustomHook(GET_ORDERS).getOrders
 
     const renderDashBoardContent = () => {
         switch (dashboardContent) {
@@ -31,7 +31,7 @@ export const Dashboard = () => {
                         </div>
                         <div>
                             <h4>Bricks</h4>
-                            <p>There are {bricks && [...bricks].filter((brick: Brick) => brick.quantity > 0).length} bricks available.</p>
+                            <p>There {bricks && bricks.length !== 1 ? `are ${bricks.length} bricks` : 'is 1 brick'} available.</p>
                             <p>{bricks && [...bricks].filter((brick: Brick) => brick.quantity < 200).length} bricks have got less than 200 pieces available.</p>
                         </div>
                         <div>
@@ -40,7 +40,7 @@ export const Dashboard = () => {
                         </div>
                         <div>
                             <h4>Orders</h4>
-                            <p>There are 0 orders.</p> // TODO: Add orders
+                            <p>There have been {orders && orders.length !== 1 ? `${orders.length} orders` : '1 order'} So far.</p>
                         </div>
                     </StDashboardAdministration>
                 )
@@ -112,7 +112,35 @@ export const Dashboard = () => {
                 )
             case 'orders':
                 return (
-                    <p>Order management</p> // TODO: Add orders
+                    <StDashboardList
+                        columns='2rem 4rem 6rem repeat(4, 1fr)'
+                    >
+                        <StDatshboardListTitle>Users</StDatshboardListTitle>
+                        <li>
+                            <span>id</span>
+                            <span>Items</span>
+                            <span>Total</span>
+                            <span>Shipping method</span>
+                            <span>Email</span>
+                            <span>First name</span>
+                            <span>last name</span>
+                        </li>
+                        <ul>
+                            {
+                                orders && orders.map((order: Order) => (
+                                    <li key={order.id}>
+                                        <span>{order.id}</span>
+                                        <span>{order.items.length}</span>
+                                        <span>&euro;{order.total.toFixed(2)}</span>
+                                        <span>{order.shippingMethod}</span>
+                                        <span>{order.email}</span>
+                                        <span>{order.firstName}</span>
+                                        <span>{order.lastName}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </StDashboardList>
                 )
             case 'shipping':
                 return (

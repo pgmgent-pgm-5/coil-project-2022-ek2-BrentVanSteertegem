@@ -40,3 +40,28 @@ export type User = {
   password: string
   role: string
 }
+
+export type Order = {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  street: string
+  houseNumber: string
+  zipCode: string
+  city: string
+  billingFirstName: string
+  billingLastName: string
+  billingStreet: string
+  billingHouseNumber: string
+  billingZipCode: string
+  billingCity: string
+  shippingMethod: string
+  shippingPrice: number
+  total: number
+  items: string[]
+  cardNumber: string
+  cardExpirationMonth: number
+  cardExpirationYear: number
+  cardSecurityCode: string
+}

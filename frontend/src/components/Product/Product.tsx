@@ -37,7 +37,7 @@ export const Product = ({ brick }: ProductProps) => {
                 )
             case 'reviews':
                 return (
-                    <p>Reviews</p> // TODO: Add reviews
+                    <p>Seems like there are no reviews yet!</p> // TODO: Add reviews
                 )
         }
     }

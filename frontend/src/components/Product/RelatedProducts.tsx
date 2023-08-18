@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { ItemCard } from '..'
 import { Brick } from '../../types'
 import { StCardLink, StRelatedProducts, StRelatedProductsSection } from './Product.styled'
+import { CategoryContext } from '../../ContextProvider'
 
 type RelatedProductsProps = {
     title: string
@@ -9,6 +11,15 @@ type RelatedProductsProps = {
 
 export const RelatedProducts = ({ title, relatedProducts }: RelatedProductsProps) => {
     const screenWidth = window.innerWidth / 16
+
+    const categories = useContext(CategoryContext)
+
+    const getMainCategoryName = (brick: Brick) => {
+        const category = categories && categories.find(category => category.id == brick.category.id)
+        if (category) {
+            return category.mainCategory && category.mainCategory.name.toLowerCase().split(' ').join('_')
+        }
+    }
 
     return (
         <StRelatedProductsSection>
@@ -25,7 +36,7 @@ export const RelatedProducts = ({ title, relatedProducts }: RelatedProductsProps
                     ).map((relatedBrick: Brick, index: number) => (
                         <StCardLink
                             key={index}
-                            to={`${window.location.pathname.split('/').slice(0, -1).join('/')}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
+                            to={`${getMainCategoryName(relatedBrick)}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
                         >
                             <ItemCard
                                 item={relatedBrick}

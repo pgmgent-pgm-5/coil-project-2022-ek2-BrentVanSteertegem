@@ -36,7 +36,7 @@ export const RelatedProducts = ({ title, relatedProducts }: RelatedProductsProps
                     ).map((relatedBrick: Brick, index: number) => (
                         <StCardLink
                             key={index}
-                            to={`${getMainCategoryName(relatedBrick)}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
+                            to={`/${getMainCategoryName(relatedBrick)}/${relatedBrick.name.toLowerCase().split(' ').join('_')}`}
                         >
                             <ItemCard
                                 item={relatedBrick}

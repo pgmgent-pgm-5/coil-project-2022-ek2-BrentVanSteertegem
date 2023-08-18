@@ -51,7 +51,7 @@ export const Dashboard = () => {
                     >
                         <StDatshboardListTitle>Users</StDatshboardListTitle>
                         <li>
-                            <span>id</span>
+                            <span>Id</span>
                             <span>First name</span>
                             <span>Last name</span>
                             <span>Email</span>
@@ -79,7 +79,7 @@ export const Dashboard = () => {
                     >
                         <StDatshboardListTitle>Bricks</StDatshboardListTitle>
                         <li>
-                            <span>id</span>
+                            <span>Id</span>
                             <span>Name</span>
                             <span>Description</span>
                             <span>Price</span>
@@ -102,7 +102,7 @@ export const Dashboard = () => {
                                             <span>{brick.color}</span>
                                             <span>{brick.quantity}</span>
                                             <span>{brick.category.name}</span>
-                                            <img src={`/assets/images/${category.mainCategory.name.toLowerCase().split(' ').join('_')}/${brick.images[0]}`} alt={brick.name} />
+                                            <img src={`/assets/images/${category.mainCategory && category.mainCategory.name.toLowerCase().split(' ').join('_')}/${brick.images[0]}`} alt={brick.name} />
                                         </li>
                                     )
                                 })
@@ -117,13 +117,13 @@ export const Dashboard = () => {
                     >
                         <StDatshboardListTitle>Users</StDatshboardListTitle>
                         <li>
-                            <span>id</span>
+                            <span>Id</span>
                             <span>Items</span>
                             <span>Total</span>
                             <span>Shipping method</span>
                             <span>Email</span>
                             <span>First name</span>
-                            <span>last name</span>
+                            <span>Last name</span>
                         </li>
                         <ul>
                             {
@@ -144,7 +144,33 @@ export const Dashboard = () => {
                 )
             case 'shipping':
                 return (
-                    <p>Shipping management</p> // TODO: Add shipping
+                    <StDashboardList
+                    columns='2rem repeat(5, 1fr)'
+                >
+                    <StDatshboardListTitle>Users</StDatshboardListTitle>
+                    <li>
+                        <span>Id</span>
+                        <span>Shipping method</span>
+                        <span>Street</span>
+                        <span>Number</span>
+                        <span>zipCode</span>
+                        <span>City</span>
+                    </li>
+                    <ul>
+                        {
+                            orders && orders.map((order: Order) => (
+                                <li key={order.id}>
+                                    <span>{order.id}</span>
+                                    <span>{order.shippingMethod}</span>
+                                    <span>{order.street}</span>
+                                    <span>{order.houseNumber}</span>
+                                    <span>{order.zipCode}</span>
+                                    <span>{order.city}</span>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </StDashboardList>
                 )
         }
     }

@@ -115,7 +115,7 @@ export const Dashboard = () => {
                     <StDashboardList
                         columns='2rem 4rem 6rem repeat(4, 1fr)'
                     >
-                        <StDatshboardListTitle>Users</StDatshboardListTitle>
+                        <StDatshboardListTitle>Orders</StDatshboardListTitle>
                         <li>
                             <span>Id</span>
                             <span>Items</span>
@@ -147,7 +147,7 @@ export const Dashboard = () => {
                     <StDashboardList
                     columns='2rem repeat(5, 1fr)'
                 >
-                    <StDatshboardListTitle>Users</StDatshboardListTitle>
+                    <StDatshboardListTitle>Shipping</StDatshboardListTitle>
                     <li>
                         <span>Id</span>
                         <span>Shipping method</span>

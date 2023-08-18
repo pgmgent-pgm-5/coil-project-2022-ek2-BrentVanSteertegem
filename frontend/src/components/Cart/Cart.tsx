@@ -241,10 +241,10 @@ export const Cart = () => {
         // billingZipCode: Yup.string().required('Required'),
         // billingCity: Yup.string().required('Required'),
         promoCode: Yup.string(),
-        cardNumber: Yup.string().required('Required'),
-        cardExpirationMonth: Yup.number().required('Required'),
-        cardExpirationYear: Yup.number().required('Required'),
-        cardSecurityCode: Yup.string().required('Required')
+        cardNumber: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(16, 'Must contain 16 digits'),
+        cardExpirationMonth: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(2, 'Must contain 2 digits'),
+        cardExpirationYear: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(4, 'Must contain 4 digits'),
+        cardSecurityCode: Yup.string().required('Required').length(3, 'Must contain 3 characters'),
     })
 
     const placeOrder = (values: object) => {

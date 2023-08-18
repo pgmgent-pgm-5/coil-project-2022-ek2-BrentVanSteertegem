@@ -25,6 +25,10 @@ export const StCategory = styled(Link)`
     text-decoration: none;
     padding: 1rem;
     display: block;
+    
+    &:hover {
+        background-color: ${Variables.colors.primary};
+    }
 `
 
 export const StCategoryName = styled.span`

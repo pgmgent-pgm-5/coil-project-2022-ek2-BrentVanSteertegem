@@ -5,7 +5,7 @@ import 'unfonts.css'
 import './style/reset.css'
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { Dashboard, DefaultLayout } from './components/index.ts'
-import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage, ProductPage, CartPage } from './pages'
+import { FAQPage, HomePage, LoginPage, ProductsPage, PageNotFound, PrivacyPolicyPage, ReturnPolicyPage, ShippingPage, SitemapPage, TermsAndConditionsPage, TrackingPage, ProductPage, CartPage, SearchPage } from './pages'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { ContextProvider } from './ContextProvider.tsx'
 
@@ -51,6 +51,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='privacy-policy' element={<PrivacyPolicyPage />} />
                 <Route path='sitemap' element={<SitemapPage />} />
                 <Route path='cart' element={<CartPage />} />
+                <Route path='search/:search' element={<SearchPage />} />
                 <Route path='*' element={<PageNotFound />} />
               </Route>
               <Route path='bricks' element={<DefaultLayout />}>

@@ -60,3 +60,7 @@ export const StCardLink = styled(StLink)`
         }
     }
 `
+
+export const StSearchOverview = styled.div`
+    margin: ${Variables.spacing.large}rem 0 0 0;
+`

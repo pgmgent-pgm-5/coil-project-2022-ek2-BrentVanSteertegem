@@ -84,9 +84,7 @@ export const Header = () => {
                             </StHeaderButtons>
                         :
                             <>
-                                <Searchbar
-                                    onSearch={(e) => console.log(e)}
-                                />
+                                <Searchbar />
                                 <StHeaderLink
                                     to='/cart'
                                 >

@@ -11,4 +11,5 @@ The server is hosted on [Render](https://brickstore-backend.onrender.com/graphql
 ## Frontend
 The frontend is made with Vite and uses Apollo Client to communicate with the backend. It uses React Router for styling and styled components for styling.  
 Most components have been optimized to be responsive. The dashboard is the only page that is not responsive. This is because it is not meant to be used on mobile devices. The dashboard is also not publicly accessible. To access the dashboard you need to go to the `/dashboard/login` route and login first.  
-It is hosted on [Render](https://brickstore.onrender.com) as well.
+It is hosted on [Render](https://brickstore.onrender.com) as well.  
+Please note that `Render` uses a cold boot system. To make sure the server is running when you visit the website, please visit the backend first.

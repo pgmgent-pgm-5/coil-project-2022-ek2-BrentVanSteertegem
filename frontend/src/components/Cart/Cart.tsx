@@ -202,25 +202,29 @@ export const Cart = () => {
                     name: 'cardNumber',
                     type: 'number',
                     label: 'Card number',
-                    placeholder: 'Card number'
+                    placeholder: 'Card number',
+                    maxLength: 16
                 },
                 {
                     name: 'cardExpirationMonth',
                     type: 'number',
                     label: 'Month',
-                    placeholder: '01'
+                    placeholder: '01',
+                    maxLength: 2
                 },
                 {
                     name: 'cardExpirationYear',
                     type: 'number',
                     label: 'Year',
-                    placeholder: '2023'
+                    placeholder: '2023',
+                    maxLength: 4
                 },
                 {
                     name: 'cardSecurityCode',
                     type: 'text',
                     label: 'Security code',
-                    placeholder: 'Security code'
+                    placeholder: 'Security code',
+                    maxLength: 3
                 }
             ]
         ],
@@ -242,8 +246,8 @@ export const Cart = () => {
         // billingCity: Yup.string().required('Required'),
         promoCode: Yup.string(),
         cardNumber: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(16, 'Must contain 16 digits'),
-        cardExpirationMonth: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(2, 'Must contain 2 digits'),
-        cardExpirationYear: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(4, 'Must contain 4 digits'),
+        cardExpirationMonth: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(2, 'Must contain 2 digits').matches(/^0[1-9]|1[012]$/, 'Value must be between 1 and 12'),
+        cardExpirationYear: Yup.string().required('Required').matches(/^\d+$/, 'Can only contain digits').length(4, 'Must contain 4 digits').matches(/^[2-9]([1-9][0-9][0-9]|[0-9]2[3-9]|[0-9][3-9][0-9])$/, 'Value must be above 2023').matches(/^20(2[3-9]|3[0-2])$/, 'Value must be below 2033'),
         cardSecurityCode: Yup.string().required('Required').length(3, 'Must contain 3 characters'),
     })
 

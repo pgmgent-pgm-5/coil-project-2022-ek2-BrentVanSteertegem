@@ -3,7 +3,7 @@ import { StForm, StFormButton, StFormInputField, StFormInputfieldError, StFormLa
 import { Icon } from '../Icon'
 import { ReactNode, isValidElement } from 'react'
 
-type Inputfield = {name: string, type: string, label?: string, placeholder?: string, value?: string | number | boolean}
+type Inputfield = {name: string, type: string, label?: string, placeholder?: string, value?: string | number | boolean, maxLength?: number}
 
 type FormProps = {
     inputfields: Inputfield[] | Map<string, (Inputfield | ReactNode)[]>
@@ -154,6 +154,7 @@ export const Form = ({inputfields, validationSchema, onSubmit, submitText}: Form
                                                                             }}
                                                                             // @ts-ignore
                                                                             value={values[inputfield.name]}
+                                                                            maxLength={(inputfield as Inputfield).maxLength}
                                                                             hasError={error && isTouched ? true : false}
                                                                         />
                                                                     </StFormSection>

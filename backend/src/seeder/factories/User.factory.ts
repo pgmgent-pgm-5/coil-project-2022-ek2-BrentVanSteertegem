@@ -4,13 +4,18 @@ import { CreateUserInput } from '../../user/dto/create-user.input'
 import { User } from '../../user/entities/user.entity'
 import { Role } from '../../role.enum'
 import * as bcrypt from 'bcrypt'
+import { faker } from '@faker-js/faker'
 
 class UserFactory extends Factory {
   users: CreateUserInput[]
 
   constructor() {
     super()
-    this.users = [
+    this.users = []
+  }
+
+  generateUsers = async (amount: number) => {
+    const users = [
       {
         firstName: 'John',
         lastName: 'Delaware',
@@ -19,6 +24,26 @@ class UserFactory extends Factory {
         role: Role.ADMIN,
       },
     ]
+
+    for (let i = 0; i < amount; i++) {
+      const firstName = faker.person.firstName()
+      const lastName = faker.person.lastName()
+      const roles = Object.values(Role)
+      const role = roles[Math.floor(Math.random() * roles.length)]
+
+      users.push({
+        firstName: firstName,
+        lastName: lastName,
+        email: faker.internet.email({
+          firstName: firstName,
+          lastName: lastName,
+        }),
+        password: faker.internet.password(),
+        role: role,
+      })
+    }
+
+    return users
   }
 
   // make one record
@@ -28,6 +53,7 @@ class UserFactory extends Factory {
 
   // make many records
   async makeMany() {
+    this.users = await this.generateUsers(46)
     this.users.forEach(async (user) => {
       const record = await this.insert(user)
       this.inserted.push(record)

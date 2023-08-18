@@ -2,14 +2,16 @@ import { Button } from '../Button'
 import { Brick, CartItem } from '../../types'
 import { StItemCard, StImage } from './Card.styled'
 import { useContext } from 'react'
-import { CartContext, UpdateCartContext } from '../../ContextProvider'
+import { CartContext, CategoryContext, UpdateCartContext } from '../../ContextProvider'
 
 type CardProps = {
     item: Brick
 }
 
 export const ItemCard = ({ item }: CardProps) => {
-    const slug = window.location.pathname.split('/')[1]
+    const categories = useContext(CategoryContext)
+    const category = categories && categories.find((category) => category.id == item.category.id)
+    const mainCategory = categories && category && categories.find((localCategory) => localCategory.id == category.mainCategory?.id)
 
     const cart = useContext(CartContext)
     const updateCart = useContext(UpdateCartContext)
@@ -26,7 +28,7 @@ export const ItemCard = ({ item }: CardProps) => {
     return item && (
         <StItemCard>
             <StImage 
-                src={`/assets/images/${slug}/${item.images[0]}`}
+                src={`/assets/images/${mainCategory?.name.toLowerCase().split(' ').join('-')}/${item.images[0]}`}
                 alt={item.name}
             />
             <section>
